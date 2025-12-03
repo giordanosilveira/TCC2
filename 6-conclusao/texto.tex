@@ -1,0 +1,33 @@
+\chapter{Conclusão e Trabalhos Futuros}
+
+
+Muitos foram as dificuldades encontradas durante o desenvolvimento deste trabalho, desde a coleta 
+dos dados, visto que é de difícil encontrar bases de dados anotadas para a tarefa de detecção de sarcasmo
+em português. A única base de dados que foi encontrada, era uma base privada, o que dificultou o
+desenvolvimento do trabalho, visto que não foi possível compartilhar a base de dados utilizada para
+treinamento e avaliação dos modelos. A alternativa encontrada foi a criação de uma base de dados própria,
+traduzindo uma base de dados em inglês para o português. Existem sites de notícias que possuiam 
+manchetes sarcásticas, porém não seria possível utilizar essas manchetes, visto que elas eram 
+protegidas por direitos autorais. A tradução não é algo ideal, visto que o sarcasmo pode ser
+culturalmente dependente, e uma frase sarcástica em inglês pode ser que não funcione da mesma
+forma em português. Com ajuda de modelos de linguagem, como o GPT-4.1 Mini, foi possível
+realizar a tradução de forma satisfatória, porém ainda assim, a base de dados criada não foi a mais 
+linguisticamente rica possível. 
+
+
+No entanto, mesmo com as dificuldades encontradas, foi possível alcançar bons resultados com os modelos
+propostos. O modelo BiLSTM apresentou um F1-score de .83, enquanto o modelo BERT-BiLSTM alcançou um F1-score de .85,
+indicando que a incorporação do BERT trouxe melhorias no desempenho do modelo. Esses resultados são promissores,
+considerando as limitações da base de dados utilizada. Os modelos propostos demonstraram ser eficazes para a tarefa de 
+detecção de sarcasmo em textos em português, superando modelos tradicionais de machine learning em várias métricas.
+Mostrando que para a tarefa de detecção de sarcasmo em headslines em português, podem ser utilizados modelos baseados 
+em redes neurais recorrentes, lembrando que esses modelos utilizam apenas o texto como entrada, sem utilizar recursos
+linguísticos adicionais, o que pode ser uma vantagem em termos de simplicidade e generalização. 
+A inclusão de um BERT pré-treinado, contendo conhecimento linguístico mais amplo e contextual, ajudou a melhorar o 
+desempenho do modelo, porém menos do que o esperado.
+
+
+Para trabalhos futuros, seria interessante explorar outras arquiteturas de modelos, como transformers mais avançados, 
+ou mesmo modelos híbridos que combinem diferentes abordagens. Além disso, uma base de dados em 
+português mais rica e diversificada poderia ser criada e utilizada para treinar e avaliar os modelos, 
+o que poderia levar a melhorias significativas no desempenho e na generalização dos modelos desenvolvidos.

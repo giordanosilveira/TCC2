@@ -1,0 +1,105 @@
+\begin{thebibliography}{}
+
+\bibitem[Baruah et~al., 2020]{baruah20}
+Baruah, A., Das, K., Barbhuiya, F.  e Dey, K. (2020).
+\newblock Context-aware sarcasm detection using {BERT}.
+\newblock Em Klebanov, B.~B., Shutova, E., Lichtenstein, P., Muresan, S., Wee,
+  C., Feldman, A.  e Ghosh, D., editores, {\em Proceedings of the Second
+  Workshop on Figurative Language Processing}, p\'aginas 83--87, Online.
+  Association for Computational Linguistics.
+
+\bibitem[de~Medeiros~Caseli e das Graças Volpe~Nunes, 2023]{caseli23}
+de~Medeiros~Caseli, H. e das Graças Volpe~Nunes, M. (2023).
+\newblock {\em Processamento de Linguagem Natural}.
+\newblock Brasileiras em PLN.
+
+\bibitem[de~Souza, 2020]{Souza20}
+de~Souza, F.~C. (2020).
+\newblock Bertimbau = pretrained bert models for brazilian portuguese.
+\newblock Disserta\c{c}\~ao de Mestrado, Mestrado em Ciência da Computação -
+  Universidade Federal de Campinas, Campinas - SP.
+
+\bibitem[Devlin et~al., 2019]{devlin19}
+Devlin, J., Chang, M., Lee, K.  e Toutanova, K. (2019).
+\newblock Bert: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock p\'aginas 4171--4186.
+
+\bibitem[Grave et~al., 2018]{grave2018learning}
+Grave, E., Bojanowski, P., Gupta, P., Joulin, A.  e Mikolov, T. (2018).
+\newblock Learning word vectors for 157 languages.
+\newblock Em {\em Proceedings of the International Conference on Language
+  Resources and Evaluation (LREC 2018)}.
+
+\bibitem[Hochreiter e Kepler, 1997]{hochreiter97}
+Hochreiter, S. e Kepler, J. (1997).
+\newblock Long short-term memory.
+\newblock {\em Neural Computation}, 9(8):1735--1780.
+
+\bibitem[Joulin et~al., 2017]{joulin17}
+Joulin, A., Grave, E., Bojanowski, P.  e Mikolov, T. (2017).
+\newblock Bag of tricks for efficient text classification.
+\newblock 2:427--431.
+
+\bibitem[Khan et~al., 2025]{khan25}
+Khan, A., Majumdar, D.  e Mondal, B. (2025).
+\newblock A hybrid transformer based model for sarcasm detection from news
+  headlines.
+\newblock {\em Journal of Intelligent Information Systems}, 63:1339--1359.
+
+\bibitem[Kumar et~al., 2020]{kumar20}
+Kumar, A., Narapareddy, V.~T., Aditya~Srikanth, V., Malapati, A.  e Neti, L.
+  B.~M. (2020).
+\newblock Sarcasm detection using multi-head attention based bidirectional
+  lstm.
+\newblock {\em IEEE Access}, 8:6388--6397.
+
+\bibitem[Misra e Arora, 2023]{misra23}
+Misra, R. e Arora, P. (2023).
+\newblock Sarcasm detection using news headlines dataset.
+\newblock {\em AI Open}, 4:13--18.
+
+\bibitem[Mitchell, 1997]{mitchell97}
+Mitchell, T.~M. (1997).
+\newblock {\em Machine Learning}.
+\newblock McGraw-Hill.
+
+\bibitem[Nayak e Bolla, 2022]{nayak22}
+Nayak, D. e Bolla, B. (2022).
+\newblock {\em Efficient Deep Learning Methods for Sarcasm Detection of News
+  Headlines}, p\'aginas 371--382.
+
+\bibitem[Razali et~al., 2021]{razali21}
+Razali, M.~S., Halin, A.~A., Ye, L., Doraisamy, S.  e Norowi, N.~M. (2021).
+\newblock Sarcasm detection using deep learning with contextual features.
+\newblock {\em IEEE Access}, 9:68609--68618.
+
+\bibitem[Schuster e Paliwal, 1997]{schuster97}
+Schuster, M. e Paliwal, K.~K. (1997).
+\newblock Bidirectional recurrent neural networks.
+\newblock {\em IEEE Transactions on Signal Processing}, 45(11):2673--2681.
+
+\bibitem[Scola e Segura-Bedmar, 2021]{scola21}
+Scola, E. e Segura-Bedmar, I. (2021).
+\newblock Sarcasm detection with bert.
+\newblock {\em Procesamiento del Lenguaje Natural}, 67:13--25.
+
+\bibitem[Shrikhande et~al., 2020]{shrikhande20}
+Shrikhande, P., Setty, V.  e Sahani, D.~A. (2020).
+\newblock Sarcasm detection in newspaper headlines.
+\newblock Em {\em 2020 IEEE 15th International Conference on Industrial and
+  Information Systems (ICIIS)}, p\'aginas 483--487.
+
+\bibitem[Tan et~al., 2023]{tan23}
+Tan, Y., Chow, C.~O., Kanesan, J., Chuah, J.~H.  e Lim, Y. (2023).
+\newblock Sentiment analysis and sarcasm detection using deep multi-task
+  learning.
+\newblock {\em Wireless Personal Communications}, 129:2213--2237.
+
+\bibitem[Vaswani et~al., 2017]{vaswani17}
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N.,
+  Kaiser, L.  e Polosukhin, I. (2017).
+\newblock Attention is all you need.
+\newblock p\'aginas 6000--6010.
+
+\end{thebibliography}

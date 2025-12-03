@@ -1,0 +1,130 @@
+\chapter{Modelo Proposto}
+
+Neste capítulo, será apresentado o modelo proposto para a detecção de sarcasmo em títulos de notícias 
+em português. O modelo combina a arquitetura BiLSTM com o BERT como extrator de características, visando
+aproveitar o poder do BERT para capturar o contexto e as nuances da linguagem, enquanto o BiLSTM é responsável
+por aprender as relações temporais e sequenciais dos dados.
+
+
+\section{Ferramentas e Bibliotecas}
+
+Os experimentos realizados neste trabalho foram feitos no Google Colab, que é uma plataforma de 
+computação em nuvem que permite a execução de código Python em notebooks Jupyter. O Google Colab 
+oferece acesso a GPUs, o que é essencial para o treinamento de modelos de deep learning, como o LSTM 
+e o BERT. Além disso, o Google Colab oferece uma série de bibliotecas pré-instaladas, como TensorFlow,
+Keras e Transformers, que facilitam o desenvolvimento e a implementação dos modelos. Como ambiente de
+desenvolvimento, foi utilizado o Jupyter Notebook, que é uma ferramenta interativa que permite a criação e 
+compartilhamento de documentos que contêm código, visualizações e texto explicativo. O Jupyter Notebook é amplamente 
+utilizado na comunidade de ciência de dados e machine learning devido à sua facilidade de uso e flexibilidade.
+Para a implementação dos modelos LSTM e BERT, foram utilizadas as bibliotecas TensorFlow e Keras.
+
+
+O TensorFlow é uma biblioteca de código aberto desenvolvida pelo Google para computação numérica e 
+machine learning. Ele oferece uma ampla gama de ferramentas e recursos para a construção, treinamento 
+e implantação de modelos de machine learning, incluindo suporte para redes neurais profundas e
+computação distribuída. O TensorFlow é amplamente utilizado na comunidade de machine learning devido à
+sua flexibilidade, escalabilidade e desempenho. Já o Keras é uma biblioteca de alto nível construída sobre o TensorFlow, que 
+fornece uma interface simples e intuitiva para a construção e treinamento de modelos de deep learning. O Keras oferece uma série de 
+camadas pré-construídas, otimizadores e funções de perda, o que facilita o desenvolvimento de modelos complexos.
+
+
+Além disso, para a utilização do modelo BERT, foi utilizada a biblioteca Transformers, desenvolvida pela Hugging Face.
+A biblioteca Transformers oferece uma ampla gama de modelos pré-treinados baseados na arquitetura Transformer,
+incluindo o BERT, GPT e RoBERTa. Ela fornece uma interface simples para o carregamento e utilização desses modelos, bem como 
+ferramentas para o fine-tuning e avaliação. A biblioteca Transformers é amplamente utilizada na comunidade de processamento 
+de linguagem natural devido à sua facilidade de uso e à qualidade dos modelos pré-treinados disponíveis.
+Como otimizador, foi utilizado o Adam (Adaptive Moment Estimation), que é um dos otimizadores mais populares e eficazes para o 
+treinamento de redes neurais profundas.
+
+
+Além disso, foi também utilizado o Pandas e o NumPy. O Pandas é uma biblioteca de código aberto que 
+fornece estruturas de dados e ferramentas de análise de dados para a linguagem Python. Ele é amplamente
+utilizado na comunidade de ciência de dados devido à sua facilidade de uso e eficiência no manuseio de grandes 
+conjuntos de dados. O NumPy é uma biblioteca fundamental para computação científica em Python,
+fornecendo suporte para arrays multidimensionais e uma ampla gama de funções matemáticas e estatísticas.
+Ele é amplamente utilizado na comunidade de ciência de dados e machine learning devido à sua eficiência
+e desempenho em operações numéricas.
+
+
+A seguir as versões das principais bibliotecas utilizadas neste trabalho:
+\begin{itemize}
+    \item TensorFlow: 2.12.0
+    \item Pandas: 1.5.3
+    \item NumPy: 1.24.2
+    \item Scikit-learn: 1.2.2
+    \item Transformers: 4.30.2
+\end{itemize}
+
+
+\section{Base de Dados}
+
+
+A base de dados utilizada neste trabalho é composta por títulos de notícias sarcásticas e não sarcásticas,
+conforme descrito no Capítulo \ref{chap:Fundamentação Teórica}. A base de dados então dividida em conjuntos de
+treino, validação e teste, com proporções de 70\%, 10\% e 20\%, respectivamente. Essa divisão permite
+avaliar o desempenho do modelo de forma adequada, garantindo que o modelo seja treinado em uma parte dos dados
+e avaliado em dados não vistos durante o treinamento. Para a divisão dos dados, foi utilizado a função
+\texttt{train\_test\_split} do Scikit-learn. A divisão foi feita de forma estratificada, garantindo que a proporção
+de títulos sarcásticos e não sarcásticos seja mantida em cada conjunto, além de definir um valor fixo para o parâmetro
+\texttt{random\_state}, garantindo a reprodutibilidade dos resultados.
+
+
+\section{Pré-processamento dos Dados}
+
+
+O pré-processamento dos dados é uma etapa fundamental para garantir a qualidade e eficácia dos modelos 
+utilizados na classificação. Neste trabalho, foi feito uma tradução dos títulos para o português, 
+conforme mencionado anteriormente. Para isso, foi utilizada a API do ChatGPT, que é capaz de realizar 
+traduções de boa qualidade. Essa etapa de pré-processamento é essencial para garantir que os dados estejam
+na língua correta para o desenvolvimento dos modelos propostos.
+
+
+\section{Modelo Base}
+
+
+Após a preparação dos dados, foi implementado o modelo BiLSTM. Primeiramente, os dados foram divididos 
+em conjuntos de treino, validação e teste, conforme descrito anteriormente. Para avaliar o desempenho do 
+modelo, a base de teste foi utilizada e os resultados são apresentados no Capítulo \ref{chap:Resultados}.
+O modelo BiLSTM foi implementado utilizando a API Sequencial do Keras. A arquitetura do modelo é composta
+por uma camada de embedding, seguida por uma camada BiLSTM com 128 unidades, seguida de uma operação
+de Global Max Pooling, seguidas por 2 camadas densas com funções de ativação ReLU, intercaladas com
+camadas de dropout para evitar overfitting. Finalmente, a camada de saída é uma camada densa com uma 
+unidade e função de ativação sigmóide, que produz uma saída entre 0 e 1, indicando a probabilidade da 
+manchete ser sarcástica. 
+
+
+A função de perda utilizada foi a binary crossentropy, adequada para problemas de classificação binária. 
+O otimizador utilizado foi o Adam, com uma taxa de aprendizado de 0.00001. O Adam é um dos otimizadores mais 
+populares e eficazes para o treinamento de redes neurais profundas. Um otimizador é um algoritmo que 
+ajusta os pesos do modelo durante o treinamento, com o objetivo de minimizar a função de perda. 
+
+
+O modelo foi treinado por um máximo de 25 épocas, com tamanho de lote (batch size) de 32. Durante o 
+treinamento, foi utilizado o Early Stopping, que monitora a métrica de validação (val\_loss) e 
+interrompe o treinamento se a métrica não melhorar por 3 épocas consecutivas, prevenindo overfitting. 
+
+
+\section{Modelo Proposto: BERT-BiLSTM}
+
+
+Além do modelo BiLSTM, foi implementado o modelo BERT-BiLSTM, que utiliza o modelo pré-treinado BERT como 
+camada de embedding. Como descrito anteriormente, o BERT é um modelo de linguagem baseado na arquitetura 
+Transformer, que foi pré-treinado em uma grande quantidade de dados textuais. O BERT é capaz de capturar o 
+contexto bidirecional das palavras, o que o torna muito eficaz para tarefas de processamento de linguagem 
+natural. 
+
+
+Primeiramente, os títulos foram tokenizados utilizando o tokenizador do BERTimbau, que converte as palavras
+em tokens compatíveis com o modelo. Esses tokens foram então alimentados no modelo, que gerou representações 
+vetoriais para cada título. Essas representações foram então utilizadas como entradas para o modelo BiLSTM, 
+que realizou a classificação dos títulos em sarcásticos ou não sarcásticos. A arquitetura do modelo BERT-BiLSTM 
+é semelhante à do modelo BiLSTM, com a diferença de que a camada de embedding é substituída pelo modelo BERT 
+pré-treinado. A função de perda, otimizador, tamanho de lote e estratégia de Early Stopping utilizados foram os mesmos 
+do modelo BiLSTM. 
+
+
+Espera-se que a incorporação do BERT como camada de embedding traga melhorias no desempenho do modelo, 
+especialmente na captura do contexto e das nuances da linguagem presentes nos títulos de notícias.
+
+
+

@@ -1,0 +1,130 @@
+\chapter{Resultados}
+
+Neste capítulo, será apresentada a análise dos resultados obtidos com os experimentos descritos no Capítulo \ref{chap:Experimentos}.
+Serão discutidos os principais achados, comparações com trabalhos relacionados e implicações dos resultados.
+Serão utilizados algumas métricas para avaliar o desempenho dos modelos propostos, entre elas estão 
+a acurácia, precisão, recall e F1-score.
+
+
+A acurácia é uma métrica que indica a proporção de previsões corretas em relação ao total de previsões feitas
+\begin{equation}
+    Acurácia = \frac{TP + TN}{TP + TN + FP + FN}
+\end{equation}
+onde TP é o número de verdadeiros positivos, TN é o número de verdadeiros negativos, FP é o número de falsos positivos e FN é o 
+número de falsos negativos. A acurácia é uma métrica útil quando as classes estão balanceadas, mas pode ser enganosa em casos de
+classes desbalanceadas. 
+
+
+A precisão é a proporção de verdadeiros positivos em relação ao total de previsões positivas feitas 
+pelo modelo
+\begin{equation}
+    Precisão = \frac{TP}{TP + FP}
+\end{equation}
+A precisão é importante quando o custo de falsos positivos é alto. 
+
+
+O recall, também conhecido como sensibilidade, é a proporção de verdadeiros positivos em relação ao 
+total de casos positivos reais, isto é, em relação ao total de exemplos que realmente pertencem à 
+classe positiva
+\begin{equation}
+    Recall = \frac{TP}{TP + FN}
+\end{equation}
+O recall é crucial quando o custo de falsos negativos é alto. 
+
+
+O F1-score é a média harmônica entre precisão e recall, fornecendo uma métrica balanceada que leva 
+em conta ambos. É calculado da seguinte forma:
+\begin{equation}
+    F1 = 2 \times \frac{Precisão \times Recall}{Precisão + Recall}
+\end{equation}
+O F1-score é especialmente útil quando há um trade-off, ou seja, quando aumentar a precisão pode diminuir o recall e vice-versa. 
+É desejável uma métrica que considere ambos os aspectos.
+
+
+Os resultados dos experimentos serão apresentados em tabelas e gráficos, facilitando a visualização 
+e comparação do desempenho dos modelos. Além disso, serão discutidas as possíveis razões para o desempenho observado,
+incluindo limitações dos modelos.
+
+
+\section{Resultados - BiLSTM}
+
+
+Nesta seção, serão apresentados os resultados obtidos com o modelo BiLSTM, utilizando as métricas descritas anteriormente.
+O modelo foi treinado e avaliado utilizando a base de dados que for previamente separada em conjuntos de treino, validação e teste.
+Para avaliar o desempenho do modelo, a base de teste foi utilizada, e os resultados são apresentados a
+seguir. O modelo apresentou uma acurácia de .85, o que indica que 85\% das previsões feitas pelo modelo foram corretas.
+A precisão do modelo foi de .84, indicando que 84\% das previsões positivas feitas pelo modelo estavam corretas. 
+O recall foi de .81, mostrando que o modelo conseguiu identificar 81\% dos casos positivos reais.
+O F1-score foi de .83, refletindo um bom equilíbrio entre precisão e recall.
+
+
+\section{Resultados - BERT-BiLSTM}
+
+Nesta seção, serão apresentados os resultados obtidos com o modelo BERT-BiLSTM, utilizando as métricas descritas 
+anteriormente. O modelo foi treinado e avaliado utilizando a mesma base de dados utilizada para o modelo BiLSTM,
+separada em conjuntos de treino, validação e teste. Para avaliar o desempenho do modelo, a base de teste foi 
+utilizada, e os resultados são apresentados a seguir. O modelo apresentou uma acurácia de .86, o que indica que 86\%
+das previsões feitas pelo modelo foram corretas. A precisão do modelo foi de .85, indicando que 85\% das previsões
+positivas feitas pelo modelo estavam corretas. O recall foi de .85, mostrando que o modelo conseguiu identificar 85\%
+dos casos positivos reais. O F1-score foi de .85, refletindo um bom equilíbrio entre precisão e recall.
+
+
+
+\section{Comparando modelos}
+
+% TODO: Comparar com outros trabalhos relacionados, se possível.
+Nesta seção, será feita uma comparação entre os modelos BiLSTM e BERT-BiLSTM com base nos resultados obtidos.
+O modelo BERT-BiLSTM apresentou um desempenho ligeiramente superior ao modelo BiLSTM em todas as métricas avaliadas.
+A acurácia do modelo BERT-BiLSTM foi de .86, enquanto a do modelo BiLSTM foi de .85. A precisão do modelo BERT-BiLSTM
+foi de .85, comparada a .84 do modelo BiLSTM. O recall do modelo BERT-BiLSTM foi de .85, enquanto o do modelo BiLSTM foi de .81.
+O F1-score do modelo BERT-BiLSTM foi de .85, comparado a .83 do modelo BiLSTM.
+Esses resultados indicam que a incorporação do BERT no modelo BiLSTM trouxe melhorias no desempenho, especialmente no recall, 
+sugerindo que o modelo BERT-BiLSTM é mais eficaz na identificação de casos positivos reais. 
+A tabela \ref{tab:comparacao_modelos} resume os resultados obtidos pelos dois modelos. Se comparados com outros
+trabalhos relacionados, os modelos propostos demonstram um desempenho competitivo, por exemplo, em 
+\cite{silva2022analise}, foi empregado um modelo baseado em RCNN e RoBERTa para detectar 
+sarcasmo em Twittes, alcançando uma acurácia, recall, precisão e F1-score em torno de .90. Neste 
+mesmo trabalho, ele utilizou uma série de outros modelos transformers, como ELMo, USE, NBSVM, XLNet, 
+FastText, BERT-cased, BERT-uncased e RoBERTa, obtendo resultados inferiores ao modelo RCNN e RoBERTa.
+
+
+Em \cite{ghosh2016fracking}, foi utilizado um modelo baseado em LSTM e outro em RNN para detectar sarcasmo em 
+outra base de dados de tweets, alcançando métricas impressionantes, 99\% de acurácia, 98\% de precisão,
+97\% de recall e 97\% de F1-score, para o modelo de LSTM. Para o modelo de RNN, os resultados foram ligeiramente 
+inferiores, mas ainda assim muito altos. Embora os resultados sejam significativamente melhores do que 
+os obtidos pelos modelos BiLSTM e BERT-BiLSTM, é importante considerar que a métricas obtidas pelo 
+modelo BERT-BiLSTM são competitivas. 
+
+
+Se comparamos com modelos de machine learning tradicionais, como Naive Bayes, Random Forest e Linear 
+Regression, apresentados em \cite{joshi2016word}, os modelos chegaram a proporcionar resultados 
+competitivos, em termos de acurácia e precisão, porém em recall e F1-score, os modelos BiLSTM e 
+BERT-BiLSTM superaram esses modelos tradicionais. Em \cite{joshi2016}, o modelo de RAndom Forest
+alcançou uma acurácia de .83, precisão de .91, recall de .73 e F1-score de .81, enquanto o modelo 
+de SVM alcançou uma acurácia de 60\%, precisão de 98\%, recall de 20\% e F1-score de 33\%, no 
+mesmo trabalho a outro modelo baseado em kNN alcançando um F1 de .79. Ambos os trabalhos utilizaram
+uma base de dados vindas do Twitter.
+
+
+Não existem muitos trabalhos na literatura focados na detecção de sarcasmo em textos em português,
+o que dificulta uma comparação mais ampla. No entanto, os resultados obtidos pelos modelos BiLSTM 
+e BERT-BiLSTM são promissores e indicam que esses modelos podem ser eficazes para a tarefa de 
+detecção de sarcasmo em textos em português.
+
+
+
+
+\begin{table}[!htp]
+\centering
+\caption{Comparação dos resultados dos modelos BiLSTM e BERT-BiLSTM}
+\label{tab:comparacao_modelos}
+\begin{tabular}{|c|cccc|}
+\cline{2-5}
+\multicolumn{1}{c|}{}& Acurácia & Precisão & Recall & F1-score \\
+\hline
+\texttt{BiLSTM} & .85 & .84 & .81 & .83 \\
+\hline
+\texttt{BERT-BiLSTM} & .86 & .85 & .85 & .85 \\
+\hline
+\end{tabular}
+\end{table}

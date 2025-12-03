@@ -1,0 +1,301 @@
+\chapter{Fundamentação Teórica}
+
+Este capítulo apresenta os conceitos teóricos fundamentais para o desenvolvimento deste trabalho. 
+Serão abordados tópicos relacionados ao aprendizado de máquina, processamento de linguagem natural, 
+redes neurais recorrentes e Long Short-Term Memory (LSTM), Bidirectional Encoder Representations 
+from Transformers (BERT), a base de dados utilizada para o treinamento e avaliação dos modelos 
+propostos, bem como as métricas de avaliação empregadas. Esses conceitos são essenciais para 
+compreender as técnicas e metodologias aplicadas na detecção de sarcasmo.
+\section{Aprendizado de Máquina}
+
+De acordo com \cite{mitchell97}:
+\begin{quote}
+    "Um programa de computador aprende com a experiência E em relação a uma tarefa T e uma medida de
+    desempenho P, se seu desempenho em T, medido por P, melhora com a experiência E."
+\end{quote}
+Isto significa que um sistema de aprendizado de máquina é capaz de melhorar seu desempenho em uma
+tarefa específica à medida que é exposto a mais dados ou experiências relacionadas a essa tarefa. 
+
+
+O aprendizado de máquina pode ser dividido em três categorias principais \cite{alpaydin20}, aprendizado
+supervisionado, aprendizado não supervisionado e aprendizado por reforço. No aprendizado supervisionado,
+o modelo é treinado com um conjunto de dados rotulado, onde cada exemplo de entrada está associado a  
+uma saída desejada. O objetivo do modelo é aprender a mapear entradas para saídas corretas, de forma
+que possa fazer previsões precisas em novos dados. Já no aprendizado não supervisionado, o modelo é 
+treinado com um conjunto de dados não rotulado, onde o objetivo é descobrir padrões ou estruturas 
+subjacentes nos dados. Isso pode incluir tarefas como agrupamento (clustering) ou redução de dimensionalidade. 
+Por fim, no aprendizado por reforço, o modelo aprende a tomar decisões sequenciais em um ambiente, 
+recebendo recompensas ou punições com base em suas ações. O objetivo é aprender uma política que 
+maximize a recompensa acumulada ao longo do tempo.
+
+
+O Deep Learning (aprendizado profundo) \cite{goodfellow16} é uma subárea do aprendizado de máquina que se 
+concentra no uso de redes neurais profundas, ou seja, redes neurais com múltiplas camadas ocultas. Essas 
+redes são capazes de aprender representações hierárquicas dos dados, permitindo que o modelo capture
+padrões complexos e relações não lineares. O Deep Learning tem sido particularmente bem-sucedido em 
+tarefas como reconhecimento de imagem, processamento de linguagem natural e jogos, onde grandes
+quantidades de dados e poder computacional estão disponíveis. 
+
+
+Neste trabalho, o foco está no aprendizado supervisionado, onde modelos de Deep Learning são treinados
+para detectar sarcasmo em títulos de notícias. Os modelos utilizados incluem redes neurais recorrentes
+(LSTM) e o modelo BERT, ambos capazes de capturar o contexto e as nuances presentes na linguagem natural.
+ 
+
+\section{Processamento de Linguagem Natural}
+
+Processamento de Linguagem Natural (PLN) é um campo de pesquisa que tem como objetivo desenvolver 
+sistemas e métodos para permitir que computadores compreendam, interpretem e gerem linguagem humana 
+de forma automática \cite{caseli23}. É "natural" no sentido de que a linguagem é humana, em oposição a linguagens
+de programação ou outras formas de comunicação estruturada.
+
+
+Este campo de pesquisa divide-se em duas áreas principais \cite{caseli23}: a interpretação da linguagem natural - 
+NLU (Natural Language Understanding) e a geração de linguagem natural - NLG (Natural Language Generation).
+A NLU concentra-se na compreensão, ou análise, e interpretação da linguagem humana, permitindo que os 
+computadores extraíam significado e informações úteis a partir de textos ou fala. Uma aplicação comum
+da NLU é um \textit{chatbot}, que pode entender perguntas feitas em linguagem natural e fornecer respostas
+relevantes. Já a NLG foca na criação de textos ou fala em linguagem humana de forma automática. Isso envolve 
+a geração de textos coerentes e contextualmente apropriados, como resumos automáticos de documentos, 
+geração de relatórios ou, usando novamente o exemplo do \textit{chatbot}, a geração de respostas em 
+linguagem natural para as perguntas dos usuários.
+
+
+Neste trabalho, o foco está na NLU, especificamente na detecção de sarcasmo em títulos de notícias. 
+Essa tarefa envolve a análise e interpretação de textos para identificar expressões sarcásticas, 
+o que requer uma compreensão entre as palavras, o contexto e as nuances da linguagem utilizada. 
+Nos próximos capítulos, serão apresentados os modelos de aprendizado de máquina utilizados para 
+essa tarefa, bem como a base de dados empregada para o treinamento e avaliação dos modelos. 
+
+\section{Redes Neurais Recorrentes e LSTM}
+
+Redes Neurais Recorrentes (RNNs) são uma classe de redes neurais projetadas para lidar com dados 
+sequenciais, como texto ou séries temporais. Ela funciona mantendo um estado interno que captura 
+informações sobre elementos anteriores na sequência, permitindo que a rede aprenda dependências 
+de longo prazo \cite{hochreiter97}. No entanto, as RNNs tradicionais enfrentam desafios como o 
+problema do desvanecimento do gradiente, que dificulta o aprendizado de dependências de longo prazo.
+
+
+Para superar essas limitações, foram desenvolvidas variantes das RNNs, como as Long Short-Term
+Memory (LSTM) \cite{hochreiter97}. As LSTMs introduzem uma arquitetura de célula especial que inclui 
+portas de entrada, esquecimento e saída, permitindo que a rede controle o fluxo de informações e 
+mantenha informações relevantes por períodos mais longos. Isso é particularmente útil para tarefas de 
+processamento de linguagem natural, onde o contexto e a ordem das palavras são importantes para a compreensão do 
+significado. 
+
+
+O modelo LSTM funciona da seguinte maneira: a porta de entrada decide quais informações da entrada 
+atual devem ser armazenadas na célula de memória, a porta de esquecimento determina quais informações 
+devem ser descartadas da célula de memória, e a porta de saída controla quais informações da célula de 
+memória devem ser usadas para gerar a saída da rede. Essa arquitetura permite que as LSTMs aprendam 
+dependências de longo prazo de forma mais eficaz do que as RNNs tradicionais. Isso porque as LSTMs
+são capazes de manter informações relevantes na célula de memória por períodos mais longos, enquanto
+as RNNs tradicionais tendem a esquecer informações importantes devido ao problema do desvanecimento do
+gradiente.
+
+
+Visto que este trabalho visa detectar sarcasmo em títulos de notícias, é de suma importância capturar 
+o contexto e as nuances presentes na linguagem e compreender como as palavras se relacionam entre si. 
+Logo, para melhor capturar essas relações, foi utilizado o BiLSTM (Bidirectional LSTM). 
+O BiLSTM é uma Bidirectional Recurrent Neural Network (BRNN) \cite{schuster97}, isto é, uma rede 
+neural recorrente que processa a sequência de dados em ambas as direções, para frente e para trás. 
+Isso permite que o modelo tenha acesso a informações contextuais tanto do passado quanto do futuro, 
+melhorando sua capacidade de compreender o significado das palavras em um determinado contexto.
+
+
+O exemplo a seguir ilustra o funcionamento do BiLSTM. Considere a frase "Ele não gostou do filme 
+porque era muito longo". Ao processar essa frase, o LSTM unidirecional pode ter dificuldade em entender 
+o significado da palavra "porque", pois ela depende do contexto fornecido pelas palavras que a seguem. 
+No entanto, o BiLSTM pode capturar essa dependência, pois processa a frase em ambas as direções, permitindo 
+que o modelo compreenda o significado completo da frase. Como este trabalho envolve a detecção de sarcasmo 
+em títulos de notícias, o uso do BiLSTM é particularmente vantajoso, pois o sarcasmo muitas vezes depende
+do contexto e das nuances presentes na linguagem. Ao utilizar o BiLSTM, o modelo pode capturar melhor essas 
+relações e melhorar sua capacidade de detectar sarcasmo.
+
+
+O modelo base de BiLSTM utilizado neste trabalho \cite{scola21} é composto por uma camada de embeddings, 
+que converte as palavras em vetores densos de tamanho fixo. Para isto, cada headline foi tokenizado
+e convertida em uma sequência de índices inteiros. Cada token é mapeado para um vetor de embeddings, 
+utilizando o FastText \cite{joulin17} como embeddings pré-treinados. Os embbedings são necessários para que o modelo
+possa trabalhar com representações numéricas das palavras, permitindo que ele aprenda padrões e relações
+entre as palavras.
+
+
+O FastText é um modelo de aprendizado de máquina desenvolvido pelo Facebook AI Research (FAIR) para 
+gerar representações vetoriais de palavras (word embeddings) de maneira eficiente. Diferente de métodos
+tradicionais como Word2Vec, o FastText representa cada palavra como um conjunto de subpalavras 
+(n-grams de caracteres). Isso permite que o modelo capture informações morfológicas e produza vetores 
+mais robustos, especialmente para línguas ricas em flexão ou palavras raras. Além disso, o FastText 
+disponibiliza \cite{grave2018learning} vetores pré-treinados em grandes corpora, como Wikipedia e Common 
+Crawl, cobrindo mais de 150 idiomas. Esses embeddings podem ser reutilizados diretamente em tarefas de 
+PLN, reduzindo o custo de treinamento e melhorando a qualidade do modelo em cenários com poucos dados.
+
+
+Feitos os embeddings, as sequências de vetores são alimentadas em uma camada BiLSTM, que processa a
+sequência em ambas as direções (para frente e para trás). As saídas das duas direções são concatenadas,
+fornecendo uma representação rica do contexto de cada palavra na sequência. Em seguida, as saídas 
+processadas passam por uma camada de Global Max Pooling que extrai as características mais relevantes e 
+fortes ao longo de todas as etapas da sequência, condensando-as em um vetor de tamanho fixo. 
+A representação resultante passa por camadas Dense, que interpretam, refinam e comprimem os 
+recursos aprendidos. Para melhorar a generalização e reduzir o overfitting, camadas de Dropout 
+desativam neurônios aleatoriamente durante o treinamento. Por fim, uma camada de saída Sigmoid produz 
+uma probabilidade entre 0 e 1, permitindo que o modelo realize uma classificação binária, no caso, 
+sarcasmo ou não sarcasmo.
+
+
+\section{BERT}
+
+O BERT (Bidirectional Encoder Representations from Transformers) \cite{devlin19} é um modelo de linguagem
+baseado na arquitetura Transformer \cite{vaswani17}, que foi pré-treinado em uma grande quantidade de dados 
+textuais. Uma arquitetura Transformer é composta por camadas de atenção, que são camadas que permitem 
+que o modelo foque em diferentes partes da entrada ao processar uma sequência, e camadas feed-forward,
+que são camadas totalmente conectadas que processam as representações intermediárias geradas pelas camadas 
+de atenção. Essa arquitetura permite que o modelo capture o contexto bidirecional das palavras, 
+o que o torna muito eficaz para tarefas de processamento de linguagem natural. O BERT consiste em 
+camadas empilhadas de codificadores Transformer (Transformer Encoders), que são responsáveis por
+processar a entrada e gerar representações contextuais das palavras. 
+
+
+O BERT é um modelo baseado em Transformers pré-treinado em uma grande quantidade de dados textuais utilizando duas 
+tarefas principais: Masked Language Modeling (MLM) e Next Sentence Prediction (NSP). No MLM, o modelo é 
+treinado para prever palavras mascaradas em uma sequência de texto, isto é, algumas palavras são substituídas 
+por um token especial [MASK], e o modelo deve prever quais palavras foram mascaradas com base no contexto fornecido 
+pelas palavras restantes. No NSP, o modelo é treinado para prever se uma sentença B segue uma sentença A na 
+sequência original do texto. Essas tarefas permitem que o BERT aprenda representações ricas das palavras e do 
+contexto em que elas aparecem, o que o torna muito eficaz para umampla variedade de tarefas de processamento de 
+linguagem natural.
+
+
+O BERT utilizado neste trabalho é o BERTimbau \cite{Souza20}, que é uma versão do BERT treinada em 
+português. O BERTimbau foi treinado usando dados de BrWaC , uma grande coleção de textos em português
+da web. Como resultado, o BERTimbau é capaz de capturar as nuances e particularidades da língua portuguesa,
+o que o torna especialmente adequado para tarefas de processamento de linguagem natural nessa língua.
+
+
+A função base do BERT é gerar representações contextuais das palavras em uma sequência de texto. Essas
+representações são vetores densos que capturam o significado e o contexto das palavras, levando
+em consideração as palavras que as cercam. Essas representações podem ser utilizadas como entradas
+para outros modelos de aprendizado de máquina, como redes neurais, para realizar tarefas específicas
+de processamento de linguagem natural, função essa que foi utilizada neste trabalho e descrita 
+nos capítulos seguintes.
+
+
+
+\section{Base de Dados}
+
+
+A base de dados utilizada neste trabalho foi criada por \cite{misra23} e é composta por títulos de 
+notícias extraídos do site TheOnion.com \footnote{\url{https://www.theonion.com/}}, conhecido por seu 
+conteúdo satírico e sarcástico, e do site Huffington Post \footnote{\url{https://www.huffpost.com/}}, 
+que apresenta notícias sérias e informativas. Esta base de dados está disponível publicamente e pode ser 
+acessada através do repositório no GitHub \footnote{\url{https://raw.githubusercontent.com/rishabhmisra/News-Headlines-Dataset-For-Sarcasm-Detection/refs/heads/master/Sarcasm_Headlines_Dataset.json}}.
+O propósito do site The Onion é entreter os leitores com notícias fictícias que utilizam o sarcasmo 
+como principal recurso humorístico, isto prove um ambiente ideal para coletar exemplos de sarcasmo em 
+títulos de notícias.
+
+
+Muitos estudos anteriores, que serão referenciados logo mais, sobre detecção de sarcasmo utilizavam 
+bases de dados compostas por tweets, que são mensagens curtas postadas na plataforma Twitter. No entanto, 
+tweets podem conter abreviações, gírias, erros gramaticais e outros elementos que dificultam a análise
+linguística. Além disso, muitas dassas bases foram coletadas de forma automática, utilizando hashtags
+como \#sarcasm para identificar mensagens sarcásticas, porém isso de nada garante que todas as mensagens
+com essa hashtag sejam realmente sarcásticas, ou que todas as mensagens sarcásticas estejam marcadas com essa hashtag.
+Por outro lado, títulos de notícias são geralmente mais formais e estruturados, o que facilita a análise
+linguística e a detecção de sarcasmo. Portanto, a utilização de títulos de notícias como base de dados
+para detecção de sarcasmo pode proporcionar resultados mais precisos e confiáveis.
+
+
+A base de dados contém 28.503 títulos de notícias, sendo 14.951 títulos sarcásticos do The Onion e 
+13.552 títulos não sarcásticos do Huffington Post, ou seja, a base de dados está balanceada entre as
+duas classes. Cada título é acompanhado por um rótulo binário, onde 1 indica que o título é sarcástico 
+e 0 indica que o título não é sarcástico. A seguir, são apresentados alguns exemplos de títulos
+sarcasticos e não sarcásticos presentes na base de dados:
+\begin{itemize}
+    \item Título sarcástico: "ford develops new suv that runs purely on gasoline"
+    \item Título não sarcástico: "what to know regarding current treatments for ebola"
+    \item Título sarcástico: "mother comes pretty close to using word 'streaming' correctly"
+    \item Título não sarcástico: "5 ways to file your taxes with less stress"
+\end{itemize}
+Esses exemplos ilustram a diferença entre títulos sarcásticos, que utilizam humor e ironia para transmitir
+uma mensagem, e títulos não sarcásticos, que são informativos e diretos.
+
+
+Este trabalho é focado na detecção de sarcasmo em títulos de notícias em português. Portanto, a base de 
+dados original, que está em inglês, foi traduzida para o português utilizando a API do ChatGPT 
+\footnote{\url{https://openai.com/blog/chatgpt}}. O modelo escolhido para a tradução foi o GPT-4.1 Mini,
+que é capaz de realizar traduções de boa qualidade, entretanto, é importante ressaltar que a tradução 
+automática pode introduzir erros ou nuances que não estavam presentes no texto original. Todos os cuidados 
+foram tomados para garantir que a tradução mantivesse o significado e o contexto dos títulos originais.
+O prompt utilizado para a tradução foi elaborado para solicitar uma tradução literal, sem tentar interpretar 
+o sarcasmo, de forma a preservar o sentido original dos títulos. O prompt utilizado foi o seguinte:
+\begin{quote}
+    "You are a professional translator. Translate the following English headlines into Brazilian Portuguese.
+    Rules:
+    1. Preserve the original meaning, tone, and style.
+    2. If the sentence contains sarcasm, irony, exaggeration, or humor, keep it intact in Portuguese.
+    3. Do not explain or interpret sarcasm — just translate it naturally.
+    4. Keep proper names, places, and organizations unchanged.
+    5. Return only the translations, numbered correspondingly."
+\end{quote}
+
+
+Além disso, no momento da criação, o modelo foi configurado com uma temperatura de 0.3, o que 
+torna o modelo mais conservador, reduzindo a criatividade na resposta.
+\begin{adjustwidth}{-2cm}{-2cm} 
+\begin{verbatim}
+    response = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "system", "content": "You are a professional translator."},
+                  {"role": "user", "content": prompt}],
+        temperature=0.3
+    )
+\end{verbatim}
+\end{adjustwidth}
+
+
+
+\section{Métricas de Avaliação}
+
+Métricas de avaliação são essenciais para medir o desempenho dos modelos de aprendizado de máquina. 
+Elas fornecem uma maneira objetiva de comparar diferentes modelos e técnicas, permitindo identificar 
+quais abordagens são mais eficazes para uma determinada tarefa. Neste trabalho, serão utilizadas as 
+seguintes métricas para avaliar o desempenho dos modelos propostos: acurácia, precisão, recall e 
+F1-score, sendo está última a métrica principal para comparação entre os modelos.
+
+
+A acurácia é uma métrica que indica a proporção de previsões corretas em relação ao total de previsões feitas
+onde TP é o número de verdadeiros positivos, TN é o número de verdadeiros negativos, FP é o número de falsos positivos e FN é o 
+número de falsos negativos. A acurácia é uma métrica útil quando as classes estão balanceadas, mas pode ser enganosa em casos de
+classes desbalanceadas. 
+\begin{equation}
+    Acurácia = \frac{TP + TN}{TP + TN + FP + FN}
+\end{equation}
+
+
+A precisão é a proporção de verdadeiros positivos em relação ao total de previsões positivas feitas 
+pelo modelo. A precisão é importante quando o custo de falsos positivos é alto. 
+\begin{equation}
+    Precisão = \frac{TP}{TP + FP}
+\end{equation}
+
+
+O recall, também conhecido como sensibilidade, é a proporção de verdadeiros positivos em relação ao 
+total de casos positivos reais, isto é, em relação ao total de exemplos que realmente pertencem à 
+classe positiva, ele é crucial quando o custo de falsos negativos é alto. 
+\begin{equation}
+    Recall = \frac{TP}{TP + FN}
+\end{equation}
+
+
+O F1-score é a média harmônica entre precisão e recall, fornecendo uma métrica balanceada que leva 
+em conta ambos. O F1-score é especialmente útil quando há um trade-off, ou seja, quando aumentar a 
+precisão pode diminuir o recall e vice-versa. É desejável uma métrica que considere ambos os aspectos.
+\begin{equation}
+    F1 = 2 \times \frac{Precisão \times Recall}{Precisão + Recall}
+\end{equation}
+
+
+Esses métricas serão utilizadas para avaliar o desempenho dos modelos propostos na detecção de sarcasmo
+em títulos de notícias em português. Os resultados serão apresentados e discutidos no capítulo sobre 
+avaliação experimental.
+

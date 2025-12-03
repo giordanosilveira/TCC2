@@ -1,0 +1,94 @@
+\chapter{Avaliação Experimental}
+
+
+Neste capítulo, serão apresentados os experimentos realizados para avaliar o desempenho do modelo 
+proposto na detecção de sarcasmo em títulos de notícias em português. Serão descritos os dados utilizados,
+as métricas de avaliação adotadas, os resultados obtidos e uma análise comparativa com outros modelos 
+existentes na literatura.
+
+
+\section{Métricas de Avaliação}
+Como descrito no Capítulo 2, para avaliar o desempenho do modelo proposto, foram utilizadas as seguintes métricas:
+\begin{itemize}
+    \item Acurácia: Mede a proporção de previsões corretas em relação ao total de previsões realizadas.
+    \item Precisão: Mede a proporção de verdadeiros positivos em relação ao total de positivos previstos pelo modelo.
+    \item Recall: Mede a proporção de verdadeiros positivos em relação ao total de positivos reais no conjunto de dados.
+    \item F1-Score: É a média harmônica entre precisão e recall, fornecendo uma medida balanceada do desempenho do modelo.
+\end{itemize}
+Essas métricas foram escolhidas devido à sua capacidade de fornecer uma visão abrangente do desempenho do modelo, 
+considerando tanto a capacidade de identificar corretamente os exemplos positivos quanto a capacidade de evitar falsos 
+positivos. A principal métrica utilizada para comparar o desempenho dos modelos foi o F1-Score, pois ele leva em conta 
+tanto a precisão quanto o recall, sendo especialmente útil em situações onde há um desequilíbrio entre as classes. 
+Um F1-Score mais alto indica tanto uma alta precisão quanto um alto recall, refletindo um desempenho geral melhor do 
+modelo na tarefa de detecção de sarcasmo.
+
+
+\section{Resultados Obtidos}
+
+
+Nesta seção, serão apresentados os resultados obtidos pelos experimentos realizados com o modelo proposto,
+bem como uma comparação com outros modelos existentes na literatura. Os resultados serão apresentados em termos
+das métricas de avaliação descritas anteriormente. A Tabela \ref{tab:resultados} apresenta um resumo dos resultados 
+obtidos pelos diferentes modelos na tarefa de detecção de sarcasmo.
+
+\begin{table}[!htp]
+    \centering
+    \scriptsize
+    \caption{Resultados dos Experimentos de Detecção de Sarcasmo}
+    \label{tab:resultados}
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|c|ccccc|}
+            \cline{2-6}
+            \multicolumn{1}{c|}{} & Base de Dados & Acurácia & Precisão & Recall & F1-Score \\
+            \hline
+            \texttt{BiLSTM} & Headlines & 82\% & 79\% & 87\% & 80\% \\
+            \hline
+            \texttt{BERT + BiLSTM} & Headlines & \textbullet & 82\% & 84\% & 86\% \\
+            \hline
+            \texttt{MHA-BiLSTM \cite{kumar20} } & Headlines & \textbullet & 72\% & 83\% & 77\% \\
+            \hline
+            \texttt{BiLSTM \cite{shrikhande20}} & Headlines & 86\% & 84\% & 86\% & 85\% \\
+            \hline
+            \texttt{BERT+BiLSTM \cite{nayak22}} & Headlines & 89\% & 89\% & 89\% & 89\% \\
+            \hline
+            \texttt{MTL-BiLSTM \cite{tan23}} & Twitter & \textbullet & 93\% & 93\% & 93\% \\
+            \hline
+            \texttt{CNN-LR \cite{razali21}} & Twitter & 94\% & 95\% & 94\% & 94\% \\
+            \hline
+            \texttt{BERT \cite{baruah20}} & Twitter & \textbullet & 74\% & 74\% & 74\% \\
+            \hline
+            \texttt{BERT \cite{tan23}} & Reddit & 74\% & 74\% & 76\% & 77\% \\
+            \hline
+            \texttt{RoBERTa \cite{tan23}} & Reddit & 76\% & 76\% & 78\% & 77\% \\
+            \hline
+            \texttt{RoBERTa+Bi-LSTM+MHA \cite{khan25}} & Headlines & 93\% & 93\% & 93\% & 93\% \\
+            \hline
+        \end{tabular}%
+    }
+\end{table}
+
+Os resultados apresentados na Tabela \ref{tab:resultados} indicam que o modelo proposto, BERT + BiLSTM,
+superou o modelo BiLSTM simples em todas as métricas avaliadas. A incorporação do BERT como extrator de 
+características permitiu capturar melhor o contexto e as nuances da linguagem. No entanto, o modelo 
+base foi superado por pouco, indicando que apesar das melhorias trazidas pelo BERT, o BiLSTM ainda é um 
+modelo competitivo para a tarefa de detecção de sarcasmo.
+
+
+Em comparação com outros modelos existentes na literatura, o modelo proposto apresentou um desempenho
+competitivo, embora alguns modelos, como o MTL-BiLSTM \cite{tan23} e o CNN-LR \cite{razali21}, tenham 
+alcançado métricas superiores. É importante notar que nenhum dos modelos comparados foi testado na 
+mesma base de dados, os trabalhos acima utilizaram uma aboradagem para detecção de sarcasmo em textos
+em inglês, enquanto o presente trabalho focou em títulos de notícias em português. A comparação direta
+dos resultados deve ser feita com cautela, considerando as diferenças nas bases de dados e nas
+abordagens utilizadas.
+
+
+Os resultados obtidos indicam que o modelo proposto é eficaz na detecção de sarcasmo em títulos de 
+notícias em português, mas há espaço para melhorias. Futuras pesquisas podem explorar a incorporação 
+de outras técnicas de pré-processamento, arquiteturas de modelos mais complexas e a utilização de
+bases de dados maiores e mais diversificadas para aprimorar ainda mais o desempenho na tarefa de
+detecção de sarcasmo.
+
+
+
+
