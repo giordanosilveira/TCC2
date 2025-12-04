@@ -1,1 +1,99 @@
 \chapter{Trabalhos Relacionados}
+
+
+Nesta seção, apresentamos uma revisão dos trabalhos relacionados ao tema abordado neste documento. 
+Analisamos estudos anteriores que exploraram conceitos semelhantes, metodologias aplicadas e resultados 
+obtidos, destacando as contribuições e limitações de cada um. A seguir, discutimos como esses trabalhos 
+influenciaram o desenvolvimento do nosso estudo e como nosso trabalho se diferencia ou complementa as 
+pesquisas existentes na área.
+
+
+\section{Deep Learning para a Detecção de Sarcasmo em Textos}
+
+
+A detecção de sarcasmo em textos é um desafio significativo na área de processamento de linguagem 
+natural (PLN). Vários estudos têm explorado o uso de técnicas de deep learning para abordar essa 
+questão. Por exemplo, \cite{kumar20} combinou redes neurais recorrentes (RNNs), mais especificamente 
+uma BiLSTM, com mecanismos de atenção para focar em múltiplos aspectos semânticos de uma sentença.
+Para isto, ele utilizou duas bases de dados: Uma vinda do Reddit (SARC) e outra, a qual ele denominou de 
+IAC-V2, que contém debates informais extráidos da internet e foi rotulada por humanos. O modelo 
+proposto por eles, obteve um desempenho um bom desempenho, chegando a alcançar um F1-Score de 77\% 
+sobre a base de dados do SARC, quando os dados estão balanceados.
+
+
+Já \cite{tan23} propos um modelo baseado em Deep Multi-Task Learning para a detecção de sarcasmo e 
+análise de sentimentos. Eles utilizam para isto uma arquitetura baseada em BiLSTM sobre uma base de 
+dados do Twitter, além da mesma base utilizada por este trabalho, a de Notícias Sarcásticas. 
+O modelo proposto por eles alcançou um F1-Score de 93% na detecção de sarcasmo, superando outros
+modelos de referência. Além disso, o modelo também demonstrou eficácia na análise de sentimentos,
+indicando a viabilidade do aprendizado multitarefa para essas tarefas relacionadas.
+
+
+Continuando nessa linha, \cite{razali21} explorou o uso de redes neurais convolucionais (CNNs) para 
+a detecção de sarcasmo em textos curtos, como tweets. Eles utilizaram uma base de dados composta por 
+tweets rotulados como sarcásticos ou não sarcásticos. Seu modelo foi combinar uma CNN utilizando-a 
+para extrair características do texto e, em seguida, alimentar um classificador de Regressão Logística
+com essas características. O modelo proposto alcançou um F1-Score de 95\% na detecção de sarcasmo, 
+superando outros métodos tradicionais de classificação.
+
+
+Por fim, \cite{scola21} propôs um modelo base que seria utilizado como baseline para a detecção de 
+sarcasmo em textos. Eles utilizaram uma arquitetura baseada em BiLSTM com embeddings pré-treinados 
+GloVe para representar as palavras. A base de dados utilizada por eles foi a mesma de notícias 
+sarcásticas utilizada neste trabalho. O modelo alcançou um F1-Score de 86\%.
+
+
+\section{BERT e suas Variações para Tarefas de Classificação de Texto}
+
+
+O BERT (Bidirectional Encoder Representations from Transformers) revolucionou o campo do 
+processamento de linguagem natural ao introduzir uma abordagem baseada em transformers para o 
+pré-treinamento de modelos de linguagem. Desde sua introdução, várias variações do BERT foram 
+desenvolvidas para melhorar o desempenho em tarefas específicas de classificação de texto.
+
+
+\cite{baruah20} explorou o uso do BERT como embedding para a detecção de sentimentos em textos. Utilizando 
+um BiLSTM sobre os embeddings gerados pelo BERT. Seria um trabalho parecido com os que serão 
+apresentados a seguir, o que o diferencia é que eles utilizaram uma base de dados vinda do twitter, 
+composta não só pela resposta sarcástica, mas também contendo toda a conversa que a originou. O 
+resultado é supreendente: quando o modelo considerou a resposta imediatamente anterior à resposta sarcástica,
+o modelo alcançou um F1-Score de 74%, e a medida que mais contexto era adicionado, pior era o desempenho. 
+Quando adicionado 2 ou 3 respostas anteriores, o desempenho caiu para 50% e 33%, respectivamente. Se 
+considerado todo o contexto da conversa, o desempenho melhora, porém não chega a ser tão bom quanto
+considerar apenas a resposta anterior, alcançando um F1-Score de 73%.
+
+
+\cite{nayak22} explorou o uso de diferentes técnicas de embeddings de palavras para melhorar o 
+desempenho do BERT em tarefas de classificação de texto. Utilizando TF-IDF, Word2Vec, Doc2Vec e 
+BERT como técnicas de embeddings e combinando-os com outros sete classificadores, sendo eles 
+Naive Bayes, Regressão Logística, MLP, SVM, ELM, LSTM e BiLSTM, eles avaliaram o desempenho na 
+mesma base de dados de notícias sarcásticas utilizada neste trabalho. O melhor desempenho foi 
+obtido utilizando o BERT combinado com LSTM/BiLSTM, alcançando um F1-Score de 89\%. 
+
+
+Em outro estudo, \cite{shu24} comparou o desempenho entre BERT e sua variação RoBERTa (Robustly 
+Optimized BERT Pretraining Approach) em tarefas de classificação de texto. Utilizando uma base de 
+dados vinda do Reddit, eles avaliaram o desempenho dos dois modelos utilizando as métricas típicas
+de classificação. Eles utilizaram o BERT base, O BERT large, o RoBERTa base e o RoBERTa large. O melhor 
+desempenho foi obtido utilizando o RoBERTa large, alcançando um F1-Score de 76%.
+
+
+Já \cite{khan25} mais recentemente, propôs um modelo híbrido que combina RoBERTa com BiLSTM e 
+mecanismos de atenção para melhorar a detecção de sarcasmo em textos. Eles utilizaram três bases de
+dados: Duas vindas do Reddit e uma do Twitter. O modelo proposto alcançou um F1-Score de 93% na 
+detecção de sarcasmo, superando outros modelos de referência.
+
+
+Por fim, \cite{scola21} também explorou o uso do BERT para a detecção de sarcasmo em textos. Eles
+utilizaram o BERT Large como classificador direto, sem a utilização de camadas adicionais. 
+A base de dados utilizada por eles foi a mesma de notícias sarcásticas utilizada neste trabalho e o modelo
+alcançou um F1-Score de 90\%.
+
+
+O modelo base proposto por \cite{scola21}, o BiLSTM, será utilizado neste trabalho também como baseline 
+para comparação com os modelo proposto. O trabalho dele foi escolhido pois é um dos poucos que forneceu 
+acesso ao código fonte e à base de dados utilizada, o que facilita a reprodução dos resultados. Além disso, 
+o modelo proposto por ele é simples e eficiente, o que o torna uma boa referência para comparação com 
+outros modelos mais complexos.
+
+
