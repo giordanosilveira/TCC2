@@ -59,24 +59,83 @@ A seguir as versões das principais bibliotecas utilizadas neste trabalho:
 \section{Base de Dados}
 
 
-A base de dados utilizada neste trabalho é composta por títulos de notícias sarcásticas e não sarcásticas,
-conforme descrito no Capítulo \ref{chap:Fundamentação Teórica}. A base de dados então dividida em conjuntos de
+A base de dados utilizada neste trabalho foi criada por \cite{misra23} e é composta por títulos de 
+notícias extraídos do site TheOnion.com \footnote{\url{https://www.theonion.com/}}, conhecido por seu 
+conteúdo satírico e sarcástico, e do site Huffington Post \footnote{\url{https://www.huffpost.com/}}, 
+que apresenta notícias sérias e informativas. Esta base de dados está disponível publicamente e pode ser 
+acessada através do repositório no GitHub \footnote{\url{https://raw.githubusercontent.com/rishabhmisra/News-Headlines-Dataset-For-Sarcasm-Detection/refs/heads/master/Sarcasm_Headlines_Dataset.json}}.
+O propósito do site The Onion é entreter os leitores com notícias fictícias que utilizam o sarcasmo 
+como principal recurso humorístico, isto prove um ambiente ideal para coletar exemplos de sarcasmo em 
+títulos de notícias.
+
+
+Estudos anteriores \ref{chap:trabalhos_relacionados}, sobre detecção de sarcasmo utilizavam 
+bases de dados compostas por tweets, que são mensagens curtas postadas na plataforma Twitter. No entanto, 
+tweets podem conter abreviações, gírias, erros gramaticais e outros elementos que dificultam a análise
+linguística. Além disso, muitas dassas bases foram coletadas de forma automática, utilizando hashtags
+como \#sarcasm para identificar mensagens sarcásticas, porém isso de nada garante que todas as mensagens
+com essa hashtag sejam realmente sarcásticas, ou que todas as mensagens sarcásticas estejam marcadas com essa hashtag.
+Por outro lado, títulos de notícias são geralmente mais formais e estruturados, o que facilita a análise
+linguística e a detecção de sarcasmo. Portanto, a utilização de títulos de notícias como base de dados
+para detecção de sarcasmo pode proporcionar resultados mais precisos e confiáveis.
+
+
+A base de dados contém 28.503 títulos de notícias, sendo 14.951 títulos sarcásticos do The Onion e 
+13.552 títulos não sarcásticos do Huffington Post, ou seja, a base de dados está balanceada entre as
+duas classes. Cada título é acompanhado por um rótulo binário, onde 1 indica que o título é sarcástico 
+e 0 indica que o título não é sarcástico. A seguir, são apresentados alguns exemplos de títulos
+sarcasticos e não sarcásticos presentes na base de dados:
+\begin{itemize}
+    \item Título sarcástico: "ford develops new suv that runs purely on gasoline";
+    \item Título não sarcástico: "what to know regarding current treatments for ebola";
+    \item Título sarcástico: "mother comes pretty close to using word 'streaming' correctly";
+    \item Título não sarcástico: "5 ways to file your taxes with less stress".
+\end{itemize}
+Esses exemplos ilustram a diferença entre títulos sarcásticos, que utilizam humor e ironia para transmitir
+uma mensagem, e títulos não sarcásticos, que são informativos e diretos.
+
+
+Este trabalho é focado na detecção de sarcasmo em títulos de notícias em português. Portanto, a base de 
+dados original, que está em inglês, foi traduzida para o português utilizando a API do ChatGPT 
+\footnote{\url{https://openai.com/blog/chatgpt}}. O modelo escolhido para a tradução foi o GPT-4.1 Mini,
+que é capaz de realizar traduções de boa qualidade, entretanto, é importante ressaltar que a tradução 
+automática pode introduzir erros ou nuances que não estavam presentes no texto original. Todos os cuidados 
+foram tomados para garantir que a tradução mantivesse o significado e o contexto dos títulos originais.
+O prompt utilizado para a tradução foi elaborado para solicitar uma tradução literal, sem tentar interpretar 
+o sarcasmo, de forma a preservar o sentido original dos títulos. O prompt utilizado foi o seguinte:
+\begin{quote}
+    "You are a professional translator. Translate the following English headlines into Brazilian Portuguese.
+    Rules:
+    1. Preserve the original meaning, tone, and style.
+    2. If the sentence contains sarcasm, irony, exaggeration, or humor, keep it intact in Portuguese.
+    3. Do not explain or interpret sarcasm — just translate it naturally.
+    4. Keep proper names, places, and organizations unchanged.
+    5. Return only the translations, numbered correspondingly."
+\end{quote}
+
+
+Além disso, no momento da criação, o modelo foi configurado com uma temperatura de 0.3, o que 
+torna o modelo mais conservador, reduzindo a criatividade na resposta.
+\newpage
+\begin{footnotesize}
+\begin{verbatim}
+    response = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "system", 
+                   "content": "You are a professional translator."},
+                  {"role": "user", "content": prompt}],
+        temperature=0.3
+    )
+\end{verbatim}
+\end{footnotesize}
+
+A base de dados utilizada neste trabalho é composta por títulos de notícias sarcásticas e não sarcásticas, A base de dados então dividida em conjuntos de
 treino, validação e teste, com proporções de 70\%, 10\% e 20\%, respectivamente. Essa divisão permite
 avaliar o desempenho do modelo de forma adequada, garantindo que o modelo seja treinado em uma parte dos dados
 e avaliado em dados não vistos durante o treinamento. Para a divisão dos dados, foi utilizado a função
 \texttt{train\_test\_split} do Scikit-learn. A divisão foi feita de forma estratificada, garantindo que a proporção
 de títulos sarcásticos e não sarcásticos seja mantida em cada conjunto, além de definir um valor fixo para o parâmetro
 \texttt{random\_state}, garantindo a reprodutibilidade dos resultados.
-
-
-\section{Pré-processamento dos Dados}
-
-
-O pré-processamento dos dados é uma etapa fundamental para garantir a qualidade e eficácia dos modelos 
-utilizados na classificação. Neste trabalho, foi feito uma tradução dos títulos para o português, 
-conforme mencionado anteriormente. Para isso, foi utilizada a API do ChatGPT, que é capaz de realizar 
-traduções de boa qualidade. Essa etapa de pré-processamento é essencial para garantir que os dados estejam
-na língua correta para o desenvolvimento dos modelos propostos.
 
 
 \section{Modelo Base}
@@ -127,4 +186,24 @@ Espera-se que a incorporação do BERT como camada de embedding traga melhorias 
 especialmente na captura do contexto e das nuances da linguagem presentes nos títulos de notícias.
 
 
+\section{Considerações}
 
+
+Neste capítulo, foram apresentados o modelo proposto para a detecção de sarcasmo em títulos de notícias
+em português, bem como as ferramentas e bibliotecas utilizadas para a implementação dos modelos. Foi
+descrita a base de dados utilizada, incluindo o processo de tradução dos títulos para o português.
+Além disso, foram detalhados o modelo base BiLSTM e o modelo proposto BERT-BiLSTM, incluindo suas arquiteturas
+e configurações de treinamento.
+
+
+O modelo BiLSTM serve como uma linha de base para comparação com o modelo proposto, permitindo avaliar
+o impacto da incorporação do BERT como camada de embedding. Está arquitetura visa aproveitar o poder do 
+BERT para capturar o contexto e as nuances da linguagem, enquanto o BiLSTM é responsável por aprender 
+as relações temporais e sequenciais dos dados. Está mesma arquitetura foi utilizada em trabalhos 
+anteriores - capítulo \ref{chap:trabalhos_relacionados} - e apresentou bons resultados na detecção de sarcasmo 
+em textos. Portanto, espera-se que o modelo proposto apresente um desempenho superior ao modelo base, 
+especialmente na captura do contexto e das nuances da linguagem presentes nos títulos de notícias.
+
+
+No próximo capítulo, serão apresentados os experimentos realizados para avaliar o desempenho do
+modelo proposto, bem como uma comparação com outros modelos existentes na literatura.

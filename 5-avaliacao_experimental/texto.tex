@@ -1,5 +1,5 @@
 \chapter{Avaliação Experimental}
-
+\label{chap:Resultados}
 
 Neste capítulo, serão apresentados os experimentos realizados para avaliar o desempenho do modelo 
 proposto na detecção de sarcasmo em títulos de notícias em português. Serão descritos os dados utilizados,
@@ -83,6 +83,13 @@ dos resultados deve ser feita com cautela, considerando as diferenças nas bases
 abordagens utilizadas.
 
 
+Se comparado com os trabalhos que utilizaram a mesma base de dados de notícias sarcásticas em inglês,
+o modelo proposto apresentou um desempenho semelhante ao de \citet{nayak22}, que também utilizou BERT 
+com BiLSTM, alcançando um F1-Score de 89\%. No entanto, o modelo proposto ficou abaixo do desempenho 
+de \citet{tan23}, que alcançou um F1-Score de 93\% utilizando uma abordagem de aprendizado multitarefa 
+com BiLSTM.
+
+
 Os resultados obtidos indicam que o modelo proposto é eficaz na detecção de sarcasmo em títulos de 
 notícias em português, mas há espaço para melhorias. Futuras pesquisas podem explorar a incorporação 
 de outras técnicas de pré-processamento, arquiteturas de modelos mais complexas e a utilização de
@@ -90,5 +97,14 @@ bases de dados maiores e mais diversificadas para aprimorar ainda mais o desempe
 detecção de sarcasmo.
 
 
+\section{Considerações}
 
+
+Neste capítulo, foram apresentados os experimentos realizados para avaliar o desempenho do modelo 
+proposto na detecção de sarcasmo em títulos de notícias em português. Os resultados indicaram que a 
+incorporação do BERT como extrator de características melhorou o desempenho em relação ao modelo BiLSTM 
+simples. No entanto, o modelo proposto ainda ficou atrás de alguns modelos existentes na literatura, especialmente aqueles 
+utilizando abordagens de aprendizado multitarefa. A comparação dos resultados deve ser feita com cautela, considerando as diferenças nas bases de dados e nas 
+abordagens utilizadas. Futuras pesquisas podem explorar novas técnicas e arquiteturas para aprimorar ainda mais o
+desempenho na tarefa de detecção de sarcasmo.
 

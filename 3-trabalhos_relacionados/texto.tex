@@ -1,5 +1,5 @@
 \chapter{Trabalhos Relacionados}
-
+\label{chap:trabalhos_relacionados}
 
 Nesta seção, apresentamos uma revisão dos trabalhos relacionados ao tema abordado neste documento. 
 Analisamos estudos anteriores que exploraram conceitos semelhantes, metodologias aplicadas e resultados 
@@ -13,7 +13,7 @@ pesquisas existentes na área.
 
 A detecção de sarcasmo em textos é um desafio significativo na área de processamento de linguagem 
 natural (PLN). Vários estudos têm explorado o uso de técnicas de deep learning para abordar essa 
-questão. Por exemplo, \cite{kumar20} combinou redes neurais recorrentes (RNNs), mais especificamente 
+questão. Por exemplo, \citet{kumar20} combinaram redes neurais recorrentes (RNNs), mais especificamente 
 uma BiLSTM, com mecanismos de atenção para focar em múltiplos aspectos semânticos de uma sentença.
 Para isto, ele utilizou duas bases de dados: Uma vinda do Reddit (SARC) e outra, a qual ele denominou de 
 IAC-V2, que contém debates informais extráidos da internet e foi rotulada por humanos. O modelo 
@@ -21,7 +21,7 @@ proposto por eles, obteve um desempenho um bom desempenho, chegando a alcançar 
 sobre a base de dados do SARC, quando os dados estão balanceados.
 
 
-Já \cite{tan23} propos um modelo baseado em Deep Multi-Task Learning para a detecção de sarcasmo e 
+Já \citet{tan23} propuseram um modelo baseado em Deep Multi-Task Learning para a detecção de sarcasmo e 
 análise de sentimentos. Eles utilizam para isto uma arquitetura baseada em BiLSTM sobre uma base de 
 dados do Twitter, além da mesma base utilizada por este trabalho, a de Notícias Sarcásticas. 
 O modelo proposto por eles alcançou um F1-Score de 93% na detecção de sarcasmo, superando outros
@@ -29,7 +29,7 @@ modelos de referência. Além disso, o modelo também demonstrou eficácia na an
 indicando a viabilidade do aprendizado multitarefa para essas tarefas relacionadas.
 
 
-Continuando nessa linha, \cite{razali21} explorou o uso de redes neurais convolucionais (CNNs) para 
+Continuando nessa linha, o trabalho apresentado por \citet{razali21} explorou o uso de redes neurais convolucionais (CNNs) para 
 a detecção de sarcasmo em textos curtos, como tweets. Eles utilizaram uma base de dados composta por 
 tweets rotulados como sarcásticos ou não sarcásticos. Seu modelo foi combinar uma CNN utilizando-a 
 para extrair características do texto e, em seguida, alimentar um classificador de Regressão Logística
@@ -37,7 +37,7 @@ com essas características. O modelo proposto alcançou um F1-Score de 95\% na d
 superando outros métodos tradicionais de classificação.
 
 
-Por fim, \cite{scola21} propôs um modelo base que seria utilizado como baseline para a detecção de 
+Por fim, \citet{scola21} propuseram um modelo base que seria utilizado como baseline para a detecção de 
 sarcasmo em textos. Eles utilizaram uma arquitetura baseada em BiLSTM com embeddings pré-treinados 
 GloVe para representar as palavras. A base de dados utilizada por eles foi a mesma de notícias 
 sarcásticas utilizada neste trabalho. O modelo alcançou um F1-Score de 86\%.
@@ -52,18 +52,18 @@ pré-treinamento de modelos de linguagem. Desde sua introdução, várias varia�
 desenvolvidas para melhorar o desempenho em tarefas específicas de classificação de texto.
 
 
-\cite{baruah20} explorou o uso do BERT como embedding para a detecção de sentimentos em textos. Utilizando 
+\citet{baruah20} exploraram o uso do BERT como embedding para a detecção de sentimentos em textos. Utilizando 
 um BiLSTM sobre os embeddings gerados pelo BERT. Seria um trabalho parecido com os que serão 
 apresentados a seguir, o que o diferencia é que eles utilizaram uma base de dados vinda do twitter, 
 composta não só pela resposta sarcástica, mas também contendo toda a conversa que a originou. O 
 resultado é supreendente: quando o modelo considerou a resposta imediatamente anterior à resposta sarcástica,
-o modelo alcançou um F1-Score de 74%, e a medida que mais contexto era adicionado, pior era o desempenho. 
-Quando adicionado 2 ou 3 respostas anteriores, o desempenho caiu para 50% e 33%, respectivamente. Se 
+o modelo alcançou um F1-Score de 74\%, e a medida que mais contexto era adicionado, pior era o desempenho. 
+Quando adicionado 2 ou 3 respostas anteriores, o desempenho caiu para 50\% e 33\%, respectivamente. Se 
 considerado todo o contexto da conversa, o desempenho melhora, porém não chega a ser tão bom quanto
-considerar apenas a resposta anterior, alcançando um F1-Score de 73%.
+considerar apenas a resposta anterior, alcançando um F1-Score de 73\%.
 
 
-\cite{nayak22} explorou o uso de diferentes técnicas de embeddings de palavras para melhorar o 
+\citet{nayak22} exploraram o uso de diferentes técnicas de embeddings de palavras para melhorar o 
 desempenho do BERT em tarefas de classificação de texto. Utilizando TF-IDF, Word2Vec, Doc2Vec e 
 BERT como técnicas de embeddings e combinando-os com outros sete classificadores, sendo eles 
 Naive Bayes, Regressão Logística, MLP, SVM, ELM, LSTM e BiLSTM, eles avaliaram o desempenho na 
@@ -71,24 +71,25 @@ mesma base de dados de notícias sarcásticas utilizada neste trabalho. O melhor
 obtido utilizando o BERT combinado com LSTM/BiLSTM, alcançando um F1-Score de 89\%. 
 
 
-Em outro estudo, \cite{shu24} comparou o desempenho entre BERT e sua variação RoBERTa (Robustly 
+Em outro estudo, \citet{shu24} comparou o desempenho entre BERT e sua variação RoBERTa (Robustly 
 Optimized BERT Pretraining Approach) em tarefas de classificação de texto. Utilizando uma base de 
 dados vinda do Reddit, eles avaliaram o desempenho dos dois modelos utilizando as métricas típicas
 de classificação. Eles utilizaram o BERT base, O BERT large, o RoBERTa base e o RoBERTa large. O melhor 
 desempenho foi obtido utilizando o RoBERTa large, alcançando um F1-Score de 76%.
 
 
-Já \cite{khan25} mais recentemente, propôs um modelo híbrido que combina RoBERTa com BiLSTM e 
+Já no trabalho de \citet{khan25} mais recentemente, foi proposto um modelo híbrido que combina RoBERTa com BiLSTM e 
 mecanismos de atenção para melhorar a detecção de sarcasmo em textos. Eles utilizaram três bases de
 dados: Duas vindas do Reddit e uma do Twitter. O modelo proposto alcançou um F1-Score de 93% na 
 detecção de sarcasmo, superando outros modelos de referência.
 
 
-Por fim, \cite{scola21} também explorou o uso do BERT para a detecção de sarcasmo em textos. Eles
+Por fim, os mesmos \citet{scola21} também exploraram o uso do BERT para a detecção de sarcasmo em textos. Eles
 utilizaram o BERT Large como classificador direto, sem a utilização de camadas adicionais. 
 A base de dados utilizada por eles foi a mesma de notícias sarcásticas utilizada neste trabalho e o modelo
 alcançou um F1-Score de 90\%.
 
+\section{Considerações}
 
 O modelo base proposto por \cite{scola21}, o BiLSTM, será utilizado neste trabalho também como baseline 
 para comparação com os modelo proposto. O trabalho dele foi escolhido pois é um dos poucos que forneceu 
@@ -96,4 +97,35 @@ acesso ao código fonte e à base de dados utilizada, o que facilita a reproduç
 o modelo proposto por ele é simples e eficiente, o que o torna uma boa referência para comparação com 
 outros modelos mais complexos.
 
+O modelo base de BiLSTM utilizado neste trabalho \cite{scola21} é composto por uma camada de embeddings, 
+que converte as palavras em vetores densos de tamanho fixo. Para isto, cada headline foi tokenizado
+e convertida em uma sequência de índices inteiros. Cada token é mapeado para um vetor de embeddings, 
+utilizando o FastText \cite{joulin17} como embeddings pré-treinados. Os embbedings são necessários para que o modelo
+possa trabalhar com representações numéricas das palavras, permitindo que ele aprenda padrões e relações
+entre as palavras.
 
+
+O FastText é um modelo de aprendizado de máquina desenvolvido pelo Facebook AI Research (FAIR) para 
+gerar representações vetoriais de palavras (word embeddings) de maneira eficiente. Diferente de métodos
+tradicionais como Word2Vec, o FastText representa cada palavra como um conjunto de subpalavras 
+(n-grams de caracteres). Isso permite que o modelo capture informações morfológicas e produza vetores 
+mais robustos, especialmente para línguas ricas em flexão ou palavras raras. Além disso, o FastText 
+disponibiliza \cite{grave2018learning} vetores pré-treinados em grandes corpora, como Wikipedia e Common 
+Crawl, cobrindo mais de 150 idiomas. Esses embeddings podem ser reutilizados diretamente em tarefas de 
+PLN, reduzindo o custo de treinamento e melhorando a qualidade do modelo em cenários com poucos dados.
+
+
+Feitos os embeddings, as sequências de vetores são alimentadas em uma camada BiLSTM, que processa a
+sequência em ambas as direções (para frente e para trás). As saídas das duas direções são concatenadas,
+fornecendo uma representação rica do contexto de cada palavra na sequência. Em seguida, as saídas 
+processadas passam por uma camada de Global Max Pooling que extrai as características mais relevantes e 
+fortes ao longo de todas as etapas da sequência, condensando-as em um vetor de tamanho fixo. 
+A representação resultante passa por camadas Dense, que interpretam, refinam e comprimem os 
+recursos aprendidos. Para melhorar a generalização e reduzir o overfitting, camadas de Dropout 
+desativam neurônios aleatoriamente durante o treinamento. Por fim, uma camada de saída Sigmoid produz 
+uma probabilidade entre 0 e 1, permitindo que o modelo realize uma classificação binária, no caso, 
+sarcasmo ou não sarcasmo.
+
+
+No próximo capítulo, apresentaremos o modelo proposto neste trabalho, que combina o BERT com a 
+arquitetura BiLSTM, detalhando sua implementação e as motivações por trás dessa escolha.

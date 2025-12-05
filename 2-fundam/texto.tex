@@ -6,6 +6,60 @@ redes neurais recorrentes e Long Short-Term Memory (LSTM), Bidirectional Encoder
 from Transformers (BERT), a base de dados utilizada para o treinamento e avaliação dos modelos 
 propostos, bem como as métricas de avaliação empregadas. Esses conceitos são essenciais para 
 compreender as técnicas e metodologias aplicadas na detecção de sarcasmo.
+
+\section{Processamento de Linguagem Natural}
+
+Processamento de Linguagem Natural (PLN) é um campo de pesquisa que tem como objetivo desenvolver 
+sistemas e métodos para permitir que computadores compreendam, interpretem e gerem linguagem humana 
+de forma automática \cite{caseli23}. É "natural" no sentido de que a linguagem é humana, em oposição a linguagens
+de programação ou outras formas de comunicação estruturada.
+
+
+Este campo de pesquisa divide-se em duas áreas principais \cite{caseli23}: a interpretação da linguagem 
+natural (ILN) e a geração de linguagem natural (GLN). A ILN concentra-se na compreensão, ou análise, e 
+interpretação da linguagem humana, permitindo que os computadores extraíam significado e informações 
+úteis a partir de textos ou fala. Uma aplicação comum da ILN é um \textit{chatbot}, que pode entender 
+perguntas feitas em linguagem natural e fornecer respostas relevantes. Já a GLN foca na criação de 
+textos ou fala em linguagem humana de forma automática. Isso envolve a geração de textos coerentes e 
+contextualmente apropriados, como resumos automáticos de documentos, geração de relatórios ou, usando 
+novamente o exemplo do \textit{chatbot}, a geração de respostas em linguagem natural para as perguntas 
+dos usuários.
+
+
+Neste trabalho, o foco está na ILN, especificamente na detecção de sarcasmo em títulos de notícias. 
+Essa tarefa envolve a análise e interpretação de textos para identificar expressões sarcásticas, 
+o que requer uma compreensão entre as palavras, o contexto e as nuances da linguagem utilizada. 
+Para tal, modelos de aprendizado de máquina são treinados para capturar essas relações e
+realizar a classificação dos títulos como sarcásticos ou não sarcásticos. Modelos podem ser 
+treinados do zero, ou podem ser utilizados modelos pré-treinados, que já possuem um conhecimento
+prévio sobre a linguagem, e são ajustados para a tarefa específica de detecção de sarcasmo. Treinar um 
+modelo é atualizá-lo e uma das formas de fazer isso é o treinamento continuado.
+
+
+O treinamento continuado é treinar o modelo pré-treinado em uma nova base de dados, que é específica 
+para a tarefa desejada que é diferente da base de dados utilizada no pré-treinamento, porém mantendo
+a mesma tarefa geral. A detecção de sarcasmo em títulos de notícias é uma tarefa específica dentro do
+campo mais amplo do processamento de linguagem natural: a análise de sentimentos. Portanto, o 
+treinamento continuado é uma abordagem adequada para adaptar modelos pré-treinados para essa tarefa 
+específica. Existem dois tipos de treinamento continuado: O treinamento continuado com foco na 
+tarefa (TAPT - Task Adaptive Pre-Training) e o treinamento continuado com foco na adaptação ao domínio
+(DAPT - Domain Adaptive Pre-Training) \cite{caseli23}. 
+
+
+O TAPT envolve a adaptação de um modelo pré-treinado para uma tarefa específica, utilizando uma base de dados
+não rotulada relacionada à tarefa. No caso da detecção de sarcasmo em títulos de notícias, o TAPT poderia
+ser realizado utilizando uma grande coleção de títulos de notícias, sem rótulos, para ajustar o modelo 
+pré-treinado. Isso permitiria que o modelo aprendesse as características específicas dos títulos de notícias, 
+melhorando sua capacidade de detectar sarcasmo nessa tarefa específica. Já o DAPT está preocupado com o 
+domínio. Neste caso, o modelo é treinado por mais algum tempo em um domínio específico. Detecção de sarcasmo
+em títulos de notícias é uma tarefa que envolve o domínio das notícias, portanto, a abordagem 
+utilizada neste trabalho foi o DAPT, onde o modelo pré-treinado é ajustado utilizando uma base de dados
+de títulos de notícias, tanto sarcásticos quanto não sarcásticos. 
+
+Treinar um modelo é uma tarefa de aprendizado de máquina, tópico este que será abordado na próxima seção.
+Nas seções seguintes, serão apresentados os modelos de aprendizado de máquina utilizados neste trabalho,
+Redes Neurais Recorrentes (RNNs) e Long Short-Term Memory (LSTM), e o modelo BERT.
+
 \section{Aprendizado de Máquina}
 
 De acordo com \cite{mitchell97}:
@@ -40,32 +94,6 @@ quantidades de dados e poder computacional estão disponíveis.
 Neste trabalho, o foco está no aprendizado supervisionado, onde modelos de Deep Learning são treinados
 para detectar sarcasmo em títulos de notícias. Os modelos utilizados incluem redes neurais recorrentes
 (LSTM) e o modelo BERT, ambos capazes de capturar o contexto e as nuances presentes na linguagem natural.
- 
-
-\section{Processamento de Linguagem Natural}
-
-Processamento de Linguagem Natural (PLN) é um campo de pesquisa que tem como objetivo desenvolver 
-sistemas e métodos para permitir que computadores compreendam, interpretem e gerem linguagem humana 
-de forma automática \cite{caseli23}. É "natural" no sentido de que a linguagem é humana, em oposição a linguagens
-de programação ou outras formas de comunicação estruturada.
-
-
-Este campo de pesquisa divide-se em duas áreas principais \cite{caseli23}: a interpretação da linguagem natural - 
-NLU (Natural Language Understanding) e a geração de linguagem natural - NLG (Natural Language Generation).
-A NLU concentra-se na compreensão, ou análise, e interpretação da linguagem humana, permitindo que os 
-computadores extraíam significado e informações úteis a partir de textos ou fala. Uma aplicação comum
-da NLU é um \textit{chatbot}, que pode entender perguntas feitas em linguagem natural e fornecer respostas
-relevantes. Já a NLG foca na criação de textos ou fala em linguagem humana de forma automática. Isso envolve 
-a geração de textos coerentes e contextualmente apropriados, como resumos automáticos de documentos, 
-geração de relatórios ou, usando novamente o exemplo do \textit{chatbot}, a geração de respostas em 
-linguagem natural para as perguntas dos usuários.
-
-
-Neste trabalho, o foco está na NLU, especificamente na detecção de sarcasmo em títulos de notícias. 
-Essa tarefa envolve a análise e interpretação de textos para identificar expressões sarcásticas, 
-o que requer uma compreensão entre as palavras, o contexto e as nuances da linguagem utilizada. 
-Nos próximos capítulos, serão apresentados os modelos de aprendizado de máquina utilizados para 
-essa tarefa, bem como a base de dados empregada para o treinamento e avaliação dos modelos. 
 
 \section{Redes Neurais Recorrentes e LSTM}
 
@@ -113,34 +141,9 @@ do contexto e das nuances presentes na linguagem. Ao utilizar o BiLSTM, o modelo
 relações e melhorar sua capacidade de detectar sarcasmo.
 
 
-O modelo base de BiLSTM utilizado neste trabalho \cite{scola21} é composto por uma camada de embeddings, 
-que converte as palavras em vetores densos de tamanho fixo. Para isto, cada headline foi tokenizado
-e convertida em uma sequência de índices inteiros. Cada token é mapeado para um vetor de embeddings, 
-utilizando o FastText \cite{joulin17} como embeddings pré-treinados. Os embbedings são necessários para que o modelo
-possa trabalhar com representações numéricas das palavras, permitindo que ele aprenda padrões e relações
-entre as palavras.
-
-
-O FastText é um modelo de aprendizado de máquina desenvolvido pelo Facebook AI Research (FAIR) para 
-gerar representações vetoriais de palavras (word embeddings) de maneira eficiente. Diferente de métodos
-tradicionais como Word2Vec, o FastText representa cada palavra como um conjunto de subpalavras 
-(n-grams de caracteres). Isso permite que o modelo capture informações morfológicas e produza vetores 
-mais robustos, especialmente para línguas ricas em flexão ou palavras raras. Além disso, o FastText 
-disponibiliza \cite{grave2018learning} vetores pré-treinados em grandes corpora, como Wikipedia e Common 
-Crawl, cobrindo mais de 150 idiomas. Esses embeddings podem ser reutilizados diretamente em tarefas de 
-PLN, reduzindo o custo de treinamento e melhorando a qualidade do modelo em cenários com poucos dados.
-
-
-Feitos os embeddings, as sequências de vetores são alimentadas em uma camada BiLSTM, que processa a
-sequência em ambas as direções (para frente e para trás). As saídas das duas direções são concatenadas,
-fornecendo uma representação rica do contexto de cada palavra na sequência. Em seguida, as saídas 
-processadas passam por uma camada de Global Max Pooling que extrai as características mais relevantes e 
-fortes ao longo de todas as etapas da sequência, condensando-as em um vetor de tamanho fixo. 
-A representação resultante passa por camadas Dense, que interpretam, refinam e comprimem os 
-recursos aprendidos. Para melhorar a generalização e reduzir o overfitting, camadas de Dropout 
-desativam neurônios aleatoriamente durante o treinamento. Por fim, uma camada de saída Sigmoid produz 
-uma probabilidade entre 0 e 1, permitindo que o modelo realize uma classificação binária, no caso, 
-sarcasmo ou não sarcasmo.
+O modelo BiLSTM foi utilizado em algumas vezes na literatura para a detecção de sarcasmo e apresentou 
+resultados promissores. Isso será apresentado no próximo capítulo, onde serão discutidos os trabalhos 
+relacionados a este tema. 
 
 
 \section{BERT}
@@ -178,80 +181,6 @@ em consideração as palavras que as cercam. Essas representações podem ser ut
 para outros modelos de aprendizado de máquina, como redes neurais, para realizar tarefas específicas
 de processamento de linguagem natural, função essa que foi utilizada neste trabalho e descrita 
 nos capítulos seguintes.
-
-
-
-\section{Base de Dados}
-
-
-A base de dados utilizada neste trabalho foi criada por \cite{misra23} e é composta por títulos de 
-notícias extraídos do site TheOnion.com \footnote{\url{https://www.theonion.com/}}, conhecido por seu 
-conteúdo satírico e sarcástico, e do site Huffington Post \footnote{\url{https://www.huffpost.com/}}, 
-que apresenta notícias sérias e informativas. Esta base de dados está disponível publicamente e pode ser 
-acessada através do repositório no GitHub \footnote{\url{https://raw.githubusercontent.com/rishabhmisra/News-Headlines-Dataset-For-Sarcasm-Detection/refs/heads/master/Sarcasm_Headlines_Dataset.json}}.
-O propósito do site The Onion é entreter os leitores com notícias fictícias que utilizam o sarcasmo 
-como principal recurso humorístico, isto prove um ambiente ideal para coletar exemplos de sarcasmo em 
-títulos de notícias.
-
-
-Muitos estudos anteriores, que serão referenciados logo mais, sobre detecção de sarcasmo utilizavam 
-bases de dados compostas por tweets, que são mensagens curtas postadas na plataforma Twitter. No entanto, 
-tweets podem conter abreviações, gírias, erros gramaticais e outros elementos que dificultam a análise
-linguística. Além disso, muitas dassas bases foram coletadas de forma automática, utilizando hashtags
-como \#sarcasm para identificar mensagens sarcásticas, porém isso de nada garante que todas as mensagens
-com essa hashtag sejam realmente sarcásticas, ou que todas as mensagens sarcásticas estejam marcadas com essa hashtag.
-Por outro lado, títulos de notícias são geralmente mais formais e estruturados, o que facilita a análise
-linguística e a detecção de sarcasmo. Portanto, a utilização de títulos de notícias como base de dados
-para detecção de sarcasmo pode proporcionar resultados mais precisos e confiáveis.
-
-
-A base de dados contém 28.503 títulos de notícias, sendo 14.951 títulos sarcásticos do The Onion e 
-13.552 títulos não sarcásticos do Huffington Post, ou seja, a base de dados está balanceada entre as
-duas classes. Cada título é acompanhado por um rótulo binário, onde 1 indica que o título é sarcástico 
-e 0 indica que o título não é sarcástico. A seguir, são apresentados alguns exemplos de títulos
-sarcasticos e não sarcásticos presentes na base de dados:
-\begin{itemize}
-    \item Título sarcástico: "ford develops new suv that runs purely on gasoline"
-    \item Título não sarcástico: "what to know regarding current treatments for ebola"
-    \item Título sarcástico: "mother comes pretty close to using word 'streaming' correctly"
-    \item Título não sarcástico: "5 ways to file your taxes with less stress"
-\end{itemize}
-Esses exemplos ilustram a diferença entre títulos sarcásticos, que utilizam humor e ironia para transmitir
-uma mensagem, e títulos não sarcásticos, que são informativos e diretos.
-
-
-Este trabalho é focado na detecção de sarcasmo em títulos de notícias em português. Portanto, a base de 
-dados original, que está em inglês, foi traduzida para o português utilizando a API do ChatGPT 
-\footnote{\url{https://openai.com/blog/chatgpt}}. O modelo escolhido para a tradução foi o GPT-4.1 Mini,
-que é capaz de realizar traduções de boa qualidade, entretanto, é importante ressaltar que a tradução 
-automática pode introduzir erros ou nuances que não estavam presentes no texto original. Todos os cuidados 
-foram tomados para garantir que a tradução mantivesse o significado e o contexto dos títulos originais.
-O prompt utilizado para a tradução foi elaborado para solicitar uma tradução literal, sem tentar interpretar 
-o sarcasmo, de forma a preservar o sentido original dos títulos. O prompt utilizado foi o seguinte:
-\begin{quote}
-    "You are a professional translator. Translate the following English headlines into Brazilian Portuguese.
-    Rules:
-    1. Preserve the original meaning, tone, and style.
-    2. If the sentence contains sarcasm, irony, exaggeration, or humor, keep it intact in Portuguese.
-    3. Do not explain or interpret sarcasm — just translate it naturally.
-    4. Keep proper names, places, and organizations unchanged.
-    5. Return only the translations, numbered correspondingly."
-\end{quote}
-
-
-Além disso, no momento da criação, o modelo foi configurado com uma temperatura de 0.3, o que 
-torna o modelo mais conservador, reduzindo a criatividade na resposta.
-\begin{adjustwidth}{-2cm}{-2cm} 
-\begin{verbatim}
-    response = client.chat.completions.create(
-        model=model,
-        messages=[{"role": "system", "content": "You are a professional translator."},
-                  {"role": "user", "content": prompt}],
-        temperature=0.3
-    )
-\end{verbatim}
-\end{adjustwidth}
-
 
 
 \section{Métricas de Avaliação}
@@ -298,4 +227,14 @@ precisão pode diminuir o recall e vice-versa. É desejável uma métrica que co
 Esses métricas serão utilizadas para avaliar o desempenho dos modelos propostos na detecção de sarcasmo
 em títulos de notícias em português. Os resultados serão apresentados e discutidos no capítulo sobre 
 avaliação experimental.
+
+
+\section{Considerações}
+
+
+Neste capítulo, foram apresentados os conceitos teóricos fundamentais para o desenvolvimento deste
+trabalho. Foram abordados tópicos relacionados ao processamento de linguagem natural, aprendizado de
+máquina, redes neurais recorrentes e LSTM, o modelo BERT, bem como as métricas de avaliação utilizadas.
+Esses conceitos são essenciais para compreender as técnicas e metodologias aplicadas na detecção de sarcasmo em
+títulos de notícias em português, que serão detalhadas nos capítulos seguintes.
 
