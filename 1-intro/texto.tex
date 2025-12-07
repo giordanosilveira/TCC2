@@ -4,64 +4,66 @@
 
 % A introdução geral do documento pode ser apresentada através das seguintes seções: Desafio, Motivação, Proposta, Contribuição e Organização do documento (especificando o que será tratado em cada um dos capítulos). O Capítulo 1 não contém subseções\footnote{Ver o Capítulo \ref{cap-exemplos} para comentários e exemplos de subseções.}.
 
-Este modelo foi proposto com o intuito de padronizar e simplificar as monografias, dissertações e teses produzidas no Departamento de Informática da UFPR. Ele foi vagamente inspirado nas normas da ABNT (conforme indicado em \cite{bibufpr15}), mas não as segue \emph{ipsis litteris}. Várias alterações foram feitas com o objetivo de melhorar sua estética e tornar o texto mais legível para trabalhos na área de informática. A versão atualizada deste modelo está disponível em \cite{maziero15}.
-
-Este modelo está baseado em uma classe especifica \verb#ppginf.cls#, que aceita várias opções de compilação. A versão do documento pode ser:
-
-\begin{itemize}
-
-\item \verb#defesa#: é gerado um documento em espaço 1,5, frente simples e sem as páginas iniciais adicionais; é uma versão adequada para receber as anotações dos membros da banca de defesa.
-
-\item \verb#final#: é gerado um documento em espaço simples, frente/verso, com páginas iniciais (capa, ficha catalográfica, folha de aprovação, agradecimentos, etc). É uma versão bem mais compacta, mais ecológica e ideal para a impressão definitiva.
-
-\end{itemize}
-
-Para obter os melhores resultados, compile este modelo usando a seguinte sequência de passos:
-
-\begin{quote}
-\begin{footnotesize}
-\begin{verbatim}
-pdflatex  main          // compilação inicial
-bibtex main             // processa referências bibliográficas
-pdflatex  main          // compilação final
-\end{verbatim}
-\end{footnotesize}
-\end{quote}
-
-ou
-
-\begin{quote}
-\begin{footnotesize}
-\begin{verbatim}
-make                    // faz tudo...
-\end{verbatim}
-\end{footnotesize}
-\end{quote}
-
-Os principais itens considerados na formatação deste documento foram:
-
-\begin{itemize}
-
-\item Papel em formato A4, com margens de 20 mm à direita e embaixo, 30 mm nos demais lados. Não devem ser usados cabeçalhos ou rodapés além dos que estão aqui propostos.
-
-\item O texto principal do documento escrito em 12 pontos. O fonte principal do texto pode ser selecionado no arquivo \verb#packages.tex#.
-
-\item Código-fonte, listagens e textos similares são formatados em fonte Courier 12 ou 10 pontos.
-
-\item O espaçamento padrão entre linhas é 1,5 linhas (1 linha na versão final). Não inserir espaços adicionais entre parágrafos normais. Figuras, tabelas, listagens e listas de itens devem ter um espaço adicional antes e após os mesmos.
-
-\item As páginas iniciais não são numeradas.
-
-\item O corpo do texto é numerado com algarismos arábicos (1, 2, 3, ...) a partir da introdução, ate o final do documento. Os números de página devem estar situados no alto à direita (páginas direitas) ou à esquerda (páginas esquerdas).
-
-\item Expressões em inglês, grego, latim ou outras línguas devem ser enfatizadas em itálico, como \emph{sui generis} ou \emph{scheduling} (use o comando \verb#\emph{...}#).
-
-\item Para reforçar algo, deve-se usar somente \textbf{negrito}. \underline{Sublinhado} ou MAIÚSCULAS não devem ser usados como forma de ênfase!
-
-\item As notas de rodapé também têm um modelo\footnote{As notas de rodapé dever ser escritas em tamanho 10 pt, numeradas em arábico.}. Notas de rodapé servem para fazer algum comentário paralelo; não as use para colocar URLs, referências bibliográficas ou significado de siglas.
-
-\end{itemize}
-
-Felizmente o \LaTeX\ resolve a maior parte dessas questões!
-
 %=====================================================
+
+Sarcasmo é uma forma de expressão frequentemente utilizada na comunicação humana, caracterizada por 
+uma discrepância entre o significado literal das palavras e a intenção real do falante. Sendo de 
+difícil detecção até mesmo para humanos, o sarcasmo apresenta um desafio significativo para sistemas 
+de processamento de linguagem natural (PLN). A detecção automática de sarcasmo é crucial para
+melhorar a compreensão de textos em diversas aplicações, por exemplo, em análises de sentimentos. 
+
+Nos últimos anos, a detecção de sarcasmo tem sido abordada com o uso de técnicas de aprendizado de 
+máquina, incluindo modelos baseados em redes neurais profundas como LSTM (Long Short-Term Memory), 
+CNN (Convolutional Neural Networks) e, mais recentemente, modelos pré-treinados como BERT 
+( Bidirectional Encoder Representations from Transformers). Estes modelos têm demonstrado um desempenho 
+promissor na identificação de sarcasmo em textos, aproveitando grandes volumes de dados para capturar
+padrões linguísticos complexos.
+
+Trabalhos anteriores na área têm explorado diversas abordagens para a detecção de sarcasmo e para 
+diversas línguas, incluindo inglês, árabe e hindi. No entanto, a detecção de sarcasmo em português ainda 
+é um campo relativamente inexplorado, com poucos estudos focados em textos brasileiros. De fato, não foram
+encontrados muitos trabalhos abordando especificamente a detecção de sarcasmo em português, o que destaca a 
+necessidade de pesquisa adicional nesta área.
+
+Este trabalho propõe uma abordagem para a detecção automática de sarcasmo em textos em português,
+utilizando modelos de aprendizado profundo, com ênfase em BERT e LSTM. A contribuição principal deste 
+trabalho é o desenvolvimento e avaliação de modelos eficazes para a detecção de sarcasmo em português, 
+além da criação de um conjunto de dados anotados especificamente para este propósito.
+
+A base de dados utilizada neste trabalho é composta por manchetes de notícias sarcásticas, coletadas de
+fontes online: como o site The Onion, conhecido por seu conteúdo satírico. Esta base já tinha sido 
+utilizada em trabalhos anteriores, como o de \citet{nayak22}. A escolha desta base de dados se justifica 
+primeiramente por estar disponível publicamente, além de conter textos gramáticalmente corretos e bem 
+estruturados, o que facilita a análise e o desenvolvimento de modelos de detecção de sarcasmo.
+
+Muitos trabalhos anteriores focaram em textos curtos, como tweets, que frequentemente contêm erros 
+gramaticais, abreviações, linguagem coloquials, hashtags, emojis e uma variedade de outros elementos 
+que podem complicar a análise linguística. Muitos trabalhos tem que empregar técnicas adicionais de
+pré-processamento para lidar com essas características, o que pode introduzir ruído e afetar negativamente o 
+desempenho dos modelos. Além disso, as bases do twitter, ou de outras redes sociais, foram coletadas 
+utilizando palavras-chave ou hashtags específicas. No twitter, por exemplo, usuários podem marcar suas 
+postagens como sarcásticas usando hashtags como \#sarcasm ou \#irony. No entanto, nem todos os usuários
+utilizam essas hashtags de forma consistente, o que pode levar a uma representação incompleta do sarcasmo
+na base de dados
+
+Em contraste, as manchetes de notícias sarcásticas são geralmente escritas por profissionais e
+passam por um processo editorial, resultando em textos mais claros e coerentes. Isso pode facilitar a 
+detecção de sarcasmo, uma vez que os modelos podem se concentrar nas nuances linguísticas sem a interferência de 
+ruídos comuns em textos de redes sociais. Portanto, a escolha de uma base de dados composta por 
+manchetes de notícias sarcásticas permite explorar a detecção de sarcasmo em um contexto mais formal e estruturado, 
+oferecendo insights valiosos para o desenvolvimento de modelos de PLN eficazes.
+
+A base de dados, porém, apresenta limitações, como o fato de ser composta exclusivamente por textos em inglês. 
+Portanto, uma das contribuições deste trabalho é a tradução e adaptação desta base de dados para o português, 
+permitindo a avaliação dos modelos propostos em um contexto linguístico diferente. Como a tradução automática 
+foi feita será explicado no Capítulo \ref{chap:modelo_proposto}. 
+
+\section{Considerações}
+
+A organização deste documento é a seguinte: o Capítulo 2 apresenta a fundamentação teórica sobre os 
+principais conceitos e técnicas relacionados à detecção de sarcasmo e aos modelos de aprendizado profundo
+utilizados. O Capítulo 3 explora trabalhos relacionados na área de detecção de sarcasmo, destacando as abordagens 
+e resultados obtidos. O Capítulo 4 detalha o modelo proposto, incluindo a arquitetura, os dados utilizados e o 
+processo de treinamento. O Capítulo 5 apresenta os experimentos realizados, os resultados obtidos e a análise 
+dos mesmos. Finalmente, o Capítulo 6 conclui o documento, resumindo as principais contribuições e sugerindo
+direções para trabalhos futuros.
