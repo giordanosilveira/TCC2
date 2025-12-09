@@ -17,14 +17,19 @@ linguisticamente rica possível.
 
 No entanto, mesmo com as dificuldades encontradas, foi possível alcançar bons resultados com os modelos
 propostos. O modelo BiLSTM apresentou um F1-score de .83, enquanto o modelo BERT-BiLSTM alcançou um F1-score de .85,
-indicando que a incorporação do BERT trouxe melhorias no desempenho do modelo. Esses resultados são promissores,
-considerando as limitações da base de dados utilizada. Os modelos propostos demonstraram ser eficazes para a tarefa de 
+indicando que a incorporação do BERT trouxe melhorias no desempenho do modelo como esperado. Esses resultados são 
+promissores, considerando as limitações da base de dados utilizada. É interessante notar que, embora o BERT tenha 
+melhorado o desempenho, a diferença não foi tão significativa. Isso indica que o modelo BiLSTM já era bastante eficaz 
+para a tarefa, isso somente com o texto como entrada, sem utilizar recursos linguísticos adicionais, apenas
+embeddings pré-treinados. Lembrado que embeddings nada mais são do que representações vetoriais das palavras, que capturam
+seu significado e contexto de uso. Visto que o BERT é um modelo pré-treinado que já possui conhecimento linguístico mais 
+amplo e contextual, pensava-se que a diferença seria maior. 
+
+
+No entanto, os modelos propostos demonstraram ser eficazes para a tarefa de 
 detecção de sarcasmo em textos em português, superando modelos tradicionais de machine learning em várias métricas.
 Mostrando que para a tarefa de detecção de sarcasmo em headslines em português, podem ser utilizados modelos baseados 
-em redes neurais recorrentes, lembrando que esses modelos utilizam apenas o texto como entrada, sem utilizar recursos
-linguísticos adicionais, o que pode ser uma vantagem em termos de simplicidade e generalização. 
-A inclusão de um BERT pré-treinado, contendo conhecimento linguístico mais amplo e contextual, ajudou a melhorar o 
-desempenho do modelo, porém menos do que o esperado.
+em redes neurais recorrentes.
 
 
 Para trabalhos futuros, seria interessante explorar outras arquiteturas de modelos, como transformers mais avançados, 

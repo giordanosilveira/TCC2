@@ -114,7 +114,6 @@ o sarcasmo, de forma a preservar o sentido original dos títulos. O prompt utili
     5. Return only the translations, numbered correspondingly."
 \end{quote}
 
-
 Além disso, no momento da criação, o modelo foi configurado com uma temperatura de 0.3, o que 
 torna o modelo mais conservador, reduzindo a criatividade na resposta.
 \newpage
@@ -129,9 +128,35 @@ torna o modelo mais conservador, reduzindo a criatividade na resposta.
     )
 \end{verbatim}
 \end{footnotesize}
+%Paragrafo para introduzir a nuvem de palavras, um gráfico de número de palavras por título e 
+%Um gráfico de número de caracteres por título.
+
+Uma análise inicial da base de dados traduzida revelou que os títulos possuem em média 10 a 12 palavras,
+com alguns títulos mais longos chegando a ter até 25 palavras. Em termos de caracteres, os títulos tem em 
+média entre 50 a 70 caracteres, com alguns títulos mais longos chegando a ter até 150 caracteres. A seguir, são apresentados
+dois gráficos que ilustram a distribuição do número de palavras e caracteres por título na base de dados traduzida.
+
+% exemplo de inserção de figura
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=12cm]{4-modelo_proposto/figuras/n_palavras.png}
+\caption{Distribuição do número de palavras por título na base de dados traduzida.}
+\label{fig:num_words_per_title}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{4-modelo_proposto/figuras/n_caracteres.png}
+    \caption{Distribuição do número de caracteres por título na base de dados traduzida.}
+    \label{fig:num_chars_per_title}
+\end{figure}
+Saber o número médio de palavras e caracteres por título é importante para o pré-processamento dos dados
+e para a configuração dos modelos de deep learning, como o BiLSTM e o BERT-BiLSTM, que serão utilizados 
+neste trabalho. Isso ajuda a determinar o tamanho máximo das sequências de entrada e a escolher as técnicas adequadas.
+
 
 A base de dados utilizada neste trabalho é composta por títulos de notícias sarcásticas e não sarcásticas, A base de dados então dividida em conjuntos de
-treino, validação e teste, com proporções de 70\%, 10\% e 20\%, respectivamente. Essa divisão permite
+treino, validação e teste, com proporções de 70\%, 15\% e 15\%, respectivamente. Essa divisão permite
 avaliar o desempenho do modelo de forma adequada, garantindo que o modelo seja treinado em uma parte dos dados
 e avaliado em dados não vistos durante o treinamento. Para a divisão dos dados, foi utilizado a função
 \texttt{train\_test\_split} do Scikit-learn. A divisão foi feita de forma estratificada, garantindo que a proporção
@@ -153,16 +178,40 @@ unidade e função de ativação sigmóide, que produz uma saída entre 0 e 1, i
 manchete ser sarcástica. 
 
 
+A operação de Global Max Pooling é utilizada para reduzir a dimensionalidade dos dados, condensando as informações 
+mais relevantes em um vetor de tamanho fixo. Essa operação seleciona o valor máximo ao longo de cada dimensão, 
+capturando as características mais fortes presentes na sequência de saída da camada BiLSTM. As camadas 
+densas subsequentes interpretam e refinam essas características, preparando-as para a classificação final. 
+A função de ativação ReLU (Rectified Linear Unit) é amplamente utilizada em redes neurais devido à sua
+capacidade de introduzir não linearidades no modelo, permitindo que ele aprenda padrões complexos nos dados. 
+As camadas de dropout são uma técnica de regularização que ajuda a prevenir o overfitting, desativando 
+aleatoriamente uma fração dos neurônios durante o treinamento, o que força o modelo a aprender representações 
+mais robustas. Por fim, a camada de saída com função de ativação sigmóide é adequada para problemas de 
+classificação binária, produzindo uma probabilidade que pode ser interpretada como a confiança do modelo 
+na classificação do título como sarcástico ou não sarcástico. O diagrama da arquitetura do modelo 
+BiLSTM é apresentado na Figura \ref{fig:bilstm_model}. 
+
+
 A função de perda utilizada foi a binary crossentropy, adequada para problemas de classificação binária. 
-O otimizador utilizado foi o Adam, com uma taxa de aprendizado de 0.00001. O Adam é um dos otimizadores mais 
-populares e eficazes para o treinamento de redes neurais profundas. Um otimizador é um algoritmo que 
-ajusta os pesos do modelo durante o treinamento, com o objetivo de minimizar a função de perda. 
+Essa função mede a diferença entre as distribuições de probabilidade previstas pelo modelo e as 
+distribuições reais dos rótulos, penalizando previsões incorretas de forma mais severa. A métrica utilizada para
+avaliar o desempenho do modelo durante o treinamento foi a acurácia (accuracy), que indica a proporção de previsões 
+corretas feitas pelo modelo em relação ao total de previsões. O otimizador utilizado foi o Adam, com uma 
+taxa de aprendizado de 0.00001. O Adam é um dos otimizadores, algoritmo que ajusta os pesos do modelo 
+durante o treinamento, com o objetivo de minimizar a função de perda. É um dos mais populares e eficazes para o 
+treinamento de redes neurais profundas.  
 
 
-O modelo foi treinado por um máximo de 25 épocas, com tamanho de lote (batch size) de 32. Durante o 
+O modelo foi treinado por um máximo de 25 épocas, com tamanho de lote (batch size) de 100. Durante o 
 treinamento, foi utilizado o Early Stopping, que monitora a métrica de validação (val\_loss) e 
 interrompe o treinamento se a métrica não melhorar por 3 épocas consecutivas, prevenindo overfitting. 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{4-modelo_proposto/figuras/modelo_base.png}
+    \caption{Arquitetura do modelo BiLSTM utilizado como baseline.}
+    \label{fig:bilstm_model}
+\end{figure}
 
 \section{Modelo Proposto: BERT-BiLSTM}
 
