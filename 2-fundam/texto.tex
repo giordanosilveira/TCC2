@@ -1,7 +1,8 @@
 \chapter{Fundamentação Teórica}
+\label{chap:Fundamentação Teórica}
 
 Este capítulo apresenta os conceitos teóricos fundamentais para o desenvolvimento deste trabalho. 
-Serão abordados tópicos relacionados ao aprendizado de máquina, processamento de linguagem natural, 
+São abordados tópicos relacionados ao aprendizado de máquina, processamento de linguagem natural, 
 redes neurais recorrentes e Long Short-Term Memory (LSTM), Bidirectional Encoder Representations 
 from Transformers (BERT), a base de dados utilizada para o treinamento e avaliação dos modelos 
 propostos, bem como as métricas de avaliação empregadas. Esses conceitos são essenciais para 
@@ -60,6 +61,7 @@ Treinar um modelo é uma tarefa de aprendizado de máquina, tópico este que ser
 Nas seções seguintes, serão apresentados os modelos de aprendizado de máquina utilizados neste trabalho,
 Redes Neurais Recorrentes (RNNs) e Long Short-Term Memory (LSTM), e o modelo BERT.
 
+
 \section{Aprendizado de Máquina}
 
 De acordo com \cite{mitchell97}:
@@ -69,7 +71,6 @@ De acordo com \cite{mitchell97}:
 \end{quote}
 Isto significa que um sistema de aprendizado de máquina é capaz de melhorar seu desempenho em uma
 tarefa específica à medida que é exposto a mais dados ou experiências relacionadas a essa tarefa. 
-
 
 O aprendizado de máquina pode ser dividido em três categorias principais \cite{alpaydin20}, aprendizado
 supervisionado, aprendizado não supervisionado e aprendizado por reforço. No aprendizado supervisionado,
@@ -83,17 +84,19 @@ recebendo recompensas ou punições com base em suas ações. O objetivo é apre
 maximize a recompensa acumulada ao longo do tempo.
 
 
-O Deep Learning (aprendizado profundo) \cite{goodfellow16} é uma subárea do aprendizado de máquina que se 
+O Aprendizado Profundo \cite{goodfellow16} é uma subárea do aprendizado de máquina que se 
 concentra no uso de redes neurais profundas, ou seja, redes neurais com múltiplas camadas ocultas. Essas 
 redes são capazes de aprender representações hierárquicas dos dados, permitindo que o modelo capture
-padrões complexos e relações não lineares. O Deep Learning tem sido particularmente bem-sucedido em 
+padrões complexos e relações não lineares. O Aprendizado Profundo tem sido particularmente bem-sucedido em 
 tarefas como reconhecimento de imagem, processamento de linguagem natural e jogos, onde grandes
 quantidades de dados e poder computacional estão disponíveis. 
 
 
-Neste trabalho, o foco está no aprendizado supervisionado, onde modelos de Deep Learning são treinados
+Neste trabalho, o foco está no aprendizado supervisionado, onde modelos de Aprendizado Profundo são treinados
 para detectar sarcasmo em títulos de notícias. Os modelos utilizados incluem redes neurais recorrentes
 (LSTM) e o modelo BERT, ambos capazes de capturar o contexto e as nuances presentes na linguagem natural.
+ 
+
 
 \section{Redes Neurais Recorrentes e LSTM}
 
@@ -143,7 +146,7 @@ relações e melhorar sua capacidade de detectar sarcasmo.
 
 O modelo BiLSTM foi utilizado em algumas vezes na literatura para a detecção de sarcasmo e apresentou 
 resultados promissores. Isso será apresentado no próximo capítulo, onde serão discutidos os trabalhos 
-relacionados a este tema. 
+relacionados a este tema.
 
 
 \section{BERT}
@@ -197,14 +200,14 @@ onde TP é o número de verdadeiros positivos, TN é o número de verdadeiros ne
 número de falsos negativos. A acurácia é uma métrica útil quando as classes estão balanceadas, mas pode ser enganosa em casos de
 classes desbalanceadas. 
 \begin{equation}
-    Acurácia = \frac{TP + TN}{TP + TN + FP + FN}
+    \text{Acurácia} = \frac{TP + TN}{TP + TN + FP + FN}
 \end{equation}
 
 
 A precisão é a proporção de verdadeiros positivos em relação ao total de previsões positivas feitas 
 pelo modelo. A precisão é importante quando o custo de falsos positivos é alto. 
 \begin{equation}
-    Precisão = \frac{TP}{TP + FP}
+    \text{Precisão} = \frac{TP}{TP + FP}
 \end{equation}
 
 
@@ -212,7 +215,7 @@ O recall, também conhecido como sensibilidade, é a proporção de verdadeiros 
 total de casos positivos reais, isto é, em relação ao total de exemplos que realmente pertencem à 
 classe positiva, ele é crucial quando o custo de falsos negativos é alto. 
 \begin{equation}
-    Recall = \frac{TP}{TP + FN}
+    \text{Recall} = \frac{TP}{TP + FN}
 \end{equation}
 
 
@@ -220,7 +223,7 @@ O F1-score é a média harmônica entre precisão e recall, fornecendo uma métr
 em conta ambos. O F1-score é especialmente útil quando há um trade-off, ou seja, quando aumentar a 
 precisão pode diminuir o recall e vice-versa. É desejável uma métrica que considere ambos os aspectos.
 \begin{equation}
-    F1 = 2 \times \frac{Precisão \times Recall}{Precisão + Recall}
+    F1 = 2 \times \frac{\text{Precisão} \times \text{Recall}}{\text{Precisão} + \text{Recall}}
 \end{equation}
 
 
@@ -228,13 +231,9 @@ Esses métricas serão utilizadas para avaliar o desempenho dos modelos proposto
 em títulos de notícias em português. Os resultados serão apresentados e discutidos no capítulo sobre 
 avaliação experimental.
 
-
 \section{Considerações}
-
 
 Neste capítulo, foram apresentados os conceitos teóricos fundamentais para o desenvolvimento deste
 trabalho. Foram abordados tópicos relacionados ao processamento de linguagem natural, aprendizado de
 máquina, redes neurais recorrentes e LSTM, o modelo BERT, bem como as métricas de avaliação utilizadas.
-Esses conceitos são essenciais para compreender as técnicas e metodologias aplicadas na detecção de sarcasmo em
-títulos de notícias em português, que serão detalhadas nos capítulos seguintes.
-
+Esses conceitos são essenciais para compreender as técnicas e métodos aplicados na detecção de sarcasmo em títulos de notícias em português, que serão detalhadas nos capítulos seguintes.

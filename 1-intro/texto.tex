@@ -10,17 +10,17 @@ Sarcasmo é uma forma de expressão frequentemente utilizada na comunicação hu
 uma discrepância entre o significado literal das palavras e a intenção real do falante. Sendo de 
 difícil detecção até mesmo para humanos, o sarcasmo apresenta um desafio significativo para sistemas 
 de processamento de linguagem natural (PLN). A detecção automática de sarcasmo é crucial para
-melhorar a compreensão de textos em diversas aplicações, por exemplo, em análises de sentimentos. 
+melhorar a compreensão de textos em diversas aplicações, por exemplo, em análises de sentimento. 
 
 Nos últimos anos, a detecção de sarcasmo tem sido abordada com o uso de técnicas de aprendizado de 
-máquina, incluindo modelos baseados em redes neurais profundas como LSTM (Long Short-Term Memory), 
-CNN (Convolutional Neural Networks) e, mais recentemente, modelos pré-treinados como BERT 
-( Bidirectional Encoder Representations from Transformers). Estes modelos têm demonstrado um desempenho 
+máquina, incluindo modelos baseados em redes neurais profundas como LSTM (Long Short-Term Memory) \cite{kumar20}, 
+CNN (Convolutional Neural Networks) \cite{razali21} e, mais recentemente, modelos pré-treinados como BERT 
+( Bidirectional Encoder Representations from Transformers) \cite{shu24}. Estes modelos têm demonstrado um desempenho 
 promissor na identificação de sarcasmo em textos, aproveitando grandes volumes de dados para capturar
 padrões linguísticos complexos.
 
 Trabalhos anteriores na área têm explorado diversas abordagens para a detecção de sarcasmo e para 
-diversas línguas, incluindo inglês, árabe e hindi. No entanto, a detecção de sarcasmo em português ainda 
+diversas línguas, incluindo inglês \cite{scola21}, árabe \cite{rahma23} e hindi \cite{swami18}. No entanto, a detecção de sarcasmo em português ainda 
 é um campo relativamente inexplorado, com poucos estudos focados em textos brasileiros. De fato, não foram
 encontrados muitos trabalhos abordando especificamente a detecção de sarcasmo em português, o que destaca a 
 necessidade de pesquisa adicional nesta área.
@@ -36,13 +36,13 @@ utilizada em trabalhos anteriores, como o de \citet{nayak22}. A escolha desta ba
 primeiramente por estar disponível publicamente, além de conter textos gramáticalmente corretos e bem 
 estruturados, o que facilita a análise e o desenvolvimento de modelos de detecção de sarcasmo.
 
-Muitos trabalhos anteriores focaram em textos curtos, como tweets, que frequentemente contêm erros 
-gramaticais, abreviações, linguagem coloquials, hashtags, emojis e uma variedade de outros elementos 
+Muitos trabalhos anteriores focaram em textos curtos, como \textit{tweets}, que frequentemente contêm erros 
+gramaticais, abreviações, linguagem coloquials, \textit{hashtags}, \textit{emojis} e uma variedade de outros elementos 
 que podem complicar a análise linguística. Muitos trabalhos tem que empregar técnicas adicionais de
 pré-processamento para lidar com essas características, o que pode introduzir ruído e afetar negativamente o 
 desempenho dos modelos. Além disso, as bases do twitter, ou de outras redes sociais, foram coletadas 
-utilizando palavras-chave ou hashtags específicas. No twitter, por exemplo, usuários podem marcar suas 
-postagens como sarcásticas usando hashtags como \#sarcasm ou \#irony. No entanto, nem todos os usuários
+utilizando palavras-chave ou \textit{hashtags} específicas. No twitter, por exemplo, usuários podem marcar suas 
+postagens como sarcásticas usando \textit{hashtags} como \#sarcasm ou \#irony. No entanto, nem todos os usuários
 utilizam essas hashtags de forma consistente, o que pode levar a uma representação incompleta do sarcasmo
 na base de dados
 
@@ -55,10 +55,10 @@ oferecendo insights valiosos para o desenvolvimento de modelos de PLN eficazes.
 
 A base de dados, porém, apresenta limitações, como o fato de ser composta exclusivamente por textos em inglês. 
 Portanto, uma das contribuições deste trabalho é a tradução e adaptação desta base de dados para o português, 
-permitindo a avaliação dos modelos propostos em um contexto linguístico diferente. Como a tradução automática 
-foi feita será explicado no Capítulo \ref{chap:modelo_proposto}. 
+permitindo a avaliação dos modelos propostos em um contexto linguístico diferente. 
+%Como a tradução automática foi feita será explicado no Capítulo \ref{chap:modelo_proposto}. 
 
-\section{Considerações}
+%\section{Considerações}
 
 A organização deste documento é a seguinte: o Capítulo 2 apresenta a fundamentação teórica sobre os 
 principais conceitos e técnicas relacionados à detecção de sarcasmo e aos modelos de aprendizado profundo
