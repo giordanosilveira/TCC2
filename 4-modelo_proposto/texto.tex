@@ -173,10 +173,16 @@ modelo, a base de teste foi utilizada e os resultados são apresentados no Capí
 O modelo BiLSTM foi implementado utilizando a API Sequencial do Keras. A arquitetura do modelo é composta
 por uma camada de embedding, seguida por uma camada BiLSTM com 128 unidades, seguida de uma operação
 de Global Max Pooling, seguidas por 2 camadas densas com funções de ativação ReLU, intercaladas com
-camadas de dropout para evitar overfitting. Finalmente, a camada de saída é uma camada densa com uma 
+camadas de dropout para evitar sobreajuste. Finalmente, a camada de saída é uma camada densa com uma 
 unidade e função de ativação sigmóide, que produz uma saída entre 0 e 1, indicando a probabilidade da 
-manchete ser sarcástica. 
+manchete ser sarcástica.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{4-modelo_proposto/figuras/modelo_base.png}
+    \caption{Arquitetura do modelo BiLSTM utilizado como baseline.}
+    \label{fig:bilstm_model}
+\end{figure}
 
 A operação de Global Max Pooling é utilizada para reduzir a dimensionalidade dos dados, condensando as informações 
 mais relevantes em um vetor de tamanho fixo. Essa operação seleciona o valor máximo ao longo de cada dimensão, 
@@ -184,7 +190,7 @@ capturando as características mais fortes presentes na sequência de saída da 
 densas subsequentes interpretam e refinam essas características, preparando-as para a classificação final. 
 A função de ativação ReLU (Rectified Linear Unit) é amplamente utilizada em redes neurais devido à sua
 capacidade de introduzir não linearidades no modelo, permitindo que ele aprenda padrões complexos nos dados. 
-As camadas de dropout são uma técnica de regularização que ajuda a prevenir o overfitting, desativando 
+As camadas de dropout são uma técnica de regularização que ajuda a prevenir o sobreajuste, desativando 
 aleatoriamente uma fração dos neurônios durante o treinamento, o que força o modelo a aprender representações 
 mais robustas. Por fim, a camada de saída com função de ativação sigmóide é adequada para problemas de 
 classificação binária, produzindo uma probabilidade que pode ser interpretada como a confiança do modelo 
@@ -199,19 +205,33 @@ avaliar o desempenho do modelo durante o treinamento foi a acurácia (accuracy),
 corretas feitas pelo modelo em relação ao total de previsões. O otimizador utilizado foi o Adam, com uma 
 taxa de aprendizado de 0.00001. O Adam é um dos otimizadores, algoritmo que ajusta os pesos do modelo 
 durante o treinamento, com o objetivo de minimizar a função de perda. É um dos mais populares e eficazes para o 
-treinamento de redes neurais profundas.  
-
+treinamento de redes neurais profundas.
 
 O modelo foi treinado por um máximo de 25 épocas, com tamanho de lote (batch size) de 100. Durante o 
 treinamento, foi utilizado o Early Stopping, que monitora a métrica de validação (val\_loss) e 
-interrompe o treinamento se a métrica não melhorar por 3 épocas consecutivas, prevenindo overfitting. 
+interrompe o treinamento se a métrica não melhorar por 3 épocas consecutivas, prevenindo sobreajuste. 
+
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{4-modelo_proposto/figuras/modelo_base.png}
-    \caption{Arquitetura do modelo BiLSTM utilizado como baseline.}
-    \label{fig:bilstm_model}
+    \includegraphics[width=0.9\textwidth]{4-modelo_proposto/figuras/acuracia_loss_graphic_bilstm.png}
+    \caption{Gráfico de acurácia e perda durante o treinamento do modelo BiLSTM.}
+    \label{fig:bilstm_accuracy_loss}
 \end{figure}
+
+A figura \ref{fig:bilstm_accuracy_loss} apresenta os gráficos de acurácia e perda (loss) durante o
+treinamento do modelo BiLSTM. A linha azul representa a métrica no conjunto de treinamento, enquanto a 
+linha laranja representa a métrica no conjunto de validação. Observa-se que a acurácia do conjunto de
+treinamento aumenta ao longo de 3 épocas, atingindo um valor próximo de 81\%, enquanto a acurácia do 
+conjunto de validação atinge um valor máximo de aproximadamente 82\% na terceira época, indicando que o 
+modelo está aprendendo a classificar corretamente os títulos sarcásticos e não sarcásticos. Após a 
+terceira a acurácia do conjunto de validação começa a diminuir, indicando que o modelo está começando a
+sobreajustar os dados de treinamento. A perda (loss) do conjunto de treinamento diminiui ao longo das épocas,
+indicando que o modelo está melhorando sua capacidade de prever os rótulos corretos, enquanto a perda do 
+conjunto de validação atinge um valor mínimo na terceira época, após o qual começa a aumentar, reforçando
+a indicação de sobreajuste. O Early Stopping foi acionado após a sexta época, visto que a métrica de validação
+não melhorou por 3 épocas consecutivas, previnindo o sobreajuste e garantindo que o modelo mantenha uma boa 
+capacidade de generalização.
 
 \section{Modelo Proposto: BERT-BiLSTM}
 
@@ -229,7 +249,7 @@ vetoriais para cada título. Essas representações foram então utilizadas como
 que realizou a classificação dos títulos em sarcásticos ou não sarcásticos. A arquitetura do modelo BERT-BiLSTM 
 é semelhante à do modelo BiLSTM, com a diferença de que a camada de embedding é substituída pelo modelo BERT 
 pré-treinado. A função de perda, otimizador, tamanho de lote e estratégia de Early Stopping utilizados foram os mesmos 
-do modelo BiLSTM. 
+do modelo BiLSTM.
 
 
 Espera-se que a incorporação do BERT como camada de embedding traga melhorias no desempenho do modelo, 

@@ -29,7 +29,81 @@ modelo na tarefa de detecção de sarcasmo.
 Nesta seção, serão apresentados os resultados obtidos pelos experimentos realizados com o modelo proposto,
 bem como uma comparação com outros modelos existentes na literatura. Os resultados serão apresentados em termos
 das métricas de avaliação descritas anteriormente. A Tabela \ref{tab:resultados} apresenta um resumo dos resultados 
-obtidos pelos diferentes modelos na tarefa de detecção de sarcasmo.
+obtidos pelos diferentes modelos na tarefa de detecção de sarcasmo. Os trabalhos listados na tabela são diferentes 
+artigos da literatura que abordaram a detecção de sarcasmo utilizando diversas abordagens e bases de dados. 
+Eles foram incluídos para fornecer um contexto comparativo para os resultados do modelo proposto neste trabalho.
+O símbolo \textbullet indica que o valor exato da métrica não foi reportado no trabalho original.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{5-avaliacao_experimental/figuras/acuracia_loss_graphic_bert_bilstm.png}
+    \caption{Gráfico de acurácia e perda durante o treinamento do modelo proposto.}
+    \label{fig:bert_bilstm_graph}
+\end{figure}
+
+
+Antes de avaliar os resultados e comparar com outros modelos, é importante analisar o 
+gráfico \ref{fig:bert_bilstm_graph}, que mostra a evolução da acurácia e da perda (loss) 
+durante o treinamento do modelo proposto (BERT + BiLSTM). Novamente, a linha azul representa 
+o desempenho no conjunto de treinamento, enquanto a linha laranja representa o desempenho no
+conjunto de validação. Observa-se que a acurácia no conjunto de treinamento aumenta rapidamente 
+nas primeiras épocas e depois começa a se estabilizar, indicando que o modelo está aprendendo 
+os padrões dos dados de treinamento. A acurácia no conjunto de validação também aumenta de 
+forma gradual, ao chegar na quarta época, as linhas cruzam-se, indicando que o modelo está começando a 
+apresentar sinais de sobreajuste (sobreajuste). A perda (loss) diminui consistentemente no conjunto de
+treinamento, o que é esperado à medida que o modelo aprende. No entanto, após a quarta época, a perda no
+conjunto de validação começa a aumentar, reforçando a indicação de sobreajuste.
+
+Essa análise sugere que o modelo proposto está aprendendo efetivamente os padrões dos dados, entretanto, 
+ela começa a apresentar sinais de sobreajuste após a quarta época. Para mitigar esse problema, o Early
+Stopping foi implementado, interrompendo o treinamento quando o desempenho no conjunto de validação, pois
+não melhorou por 3 épocas consecutivas. Isso ajuda a garantir que o modelo mantenha um bom desempenho em dados 
+não vistos, evitando o sobreajuste excessivo aos dados de treinamento.
+
+A curva ROC (\textit{Receiver Operating Characteristic}) do modelo proposto é apresentada na Figura 
+\ref{fig:roc_bert_bilstm}. A curva ROC é uma ferramenta útil para avaliar o desempenho de modelos de
+modelagem binária, mostrando a relação entre a taxa de verdadeiros positivos (TPR) e a taxa de falsos positivos (FPR)
+em diferentes limiares de decisão. A área sob a curva ROC (AUC - \textit{Area Under the Curve}) é uma métrica 
+que quantifica a capacidade do modelo de diferenciar entre as classes positivas e negativas. Um AUC de 1 indica um modelo 
+perfeito, enquanto um AUC de 0,5 indica um modelo que não tem capacidade discriminativa, equivalente a uma
+classificação aleatória. 
+
+A linha tracejada na Figura \ref{fig:roc_bert_bilstm} representa a linha de base, que corresponde a um modelo
+sem capacidade discriminativa (AUC = 0,5). A curva ROC do modelo proposto está significativamente acima da linha de base,
+apresentando uma AUC de aproximadamente 0,93, indicando que o modelo tem uma excelente capacidade de distinguir 
+entre títulos sarcásticos e não sarcásticos. Isso sugere que o modelo proposto é eficaz na tarefa de detecção de 
+sarcasmo em títulos de notícias em português.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{5-avaliacao_experimental/figuras/curva_roc_bert_bilstm.png}
+    \caption{Curva ROC do modelo proposto.}
+    \label{fig:roc_bert_bilstm}
+\end{figure}
+
+A matriz de confusão do modelo proposto é apresentada na Figura \ref{fig:matriz_confusao_bert_bilstm}.
+A matriz de confusão é uma ferramenta útil para visualizar o desempenho de um modelo de classificação,
+mostrando o número de verdadeiros positivos (TP), verdadeiros negativos (TN), falsos positivos (FP) e 
+falsos negativos (FN). No contexto da detecção de sarcasmo em títulos de notícias, os verdadeiros positivos
+são os títulos sarcásticos corretamente classificados como sarcásticos, enquanto os verdadeiros negativos
+são os títulos não sarcásticos corretamente classificados como não sarcásticos. Os falsos positivos são os títulos
+não sarcásticos incorretamente classificados como sarcásticos, e os falsos negativos são os títulos sarcásticos
+incorretamente classificados como não sarcásticos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{5-avaliacao_experimental/figuras/matriz_confusao_bert_bilstm.png}
+    \caption{Matriz de Confusão do modelo proposto.}
+    \label{fig:matriz_confusao_bert_bilstm}
+\end{figure}
+
+Observa-se na matriz de confusão que o modelo proposto classificou corretamente 1656 títulos sarcásticos (TP) e 
+2016 títulos não sarcásticos (TN). Houve 232 falsos positivos (FP) e 389 falsos negativos (FN). Esses resultados 
+indicam que o modelo tem uma boa capacidade de classificação, embora haja espaço para melhorias, especialmente na 
+redução do número de falsos negativos. A matriz também indica que o modelo é mais eficaz na 
+identificação de títulos não sarcásticos do que na identificação de títulos sarcásticos.
+
 
 \begin{table}[!htp]
     \centering
@@ -37,31 +111,27 @@ obtidos pelos diferentes modelos na tarefa de detecção de sarcasmo.
     \caption{Resultados dos Experimentos de Detecção de Sarcasmo}
     \label{tab:resultados}
     \resizebox{\textwidth}{!}{%
-        \begin{tabular}{|c|ccccc|}
-            \cline{2-6}
-            \multicolumn{1}{c|}{} & Base de Dados & Acurácia & Precisão & Recall & F1-Score \\
+        \begin{tabular}{|c|cccccc|}
+            \cline{2-7}
+            \multicolumn{1}{c|}{} & Base de Dados & Linguagem & Acurácia & Precisão & Recall & F1-Score \\
             \hline
-            \texttt{BiLSTM} & Headlines & 82\% & 79\% & 87\% & 80\% \\
+            \texttt{BiLSTM} & Headlines & Português & 83\% & 80\% & 82\% & 81\% \\
             \hline
-            \texttt{BERT + BiLSTM} & Headlines & \textbullet & 82\% & 84\% & 86\% \\
+            \texttt{BERT + BiLSTM} & Headlines & Português & 85\% & 87\% & 82\% & 85\% \\
             \hline
-            \texttt{MHA-BiLSTM \cite{kumar20} } & Headlines & \textbullet & 72\% & 83\% & 77\% \\
+            \texttt{MHA-BiLSTM \cite{kumar20} } & Headlines & Inglês & \textbullet & 72\% & 83\% & 77\% \\
             \hline
-            \texttt{BiLSTM \cite{shrikhande20}} & Headlines & 86\% & 84\% & 86\% & 85\% \\
+            \texttt{BiLSTM \cite{shrikhande20}} & Headlines & Inglês & 86\% & 84\% & 86\% & 85\% \\
             \hline
-            \texttt{BERT+BiLSTM \cite{nayak22}} & Headlines & 89\% & 89\% & 89\% & 89\% \\
+            \texttt{BERT+BiLSTM \cite{nayak22}} & Headlines & Inglês & 89\% & 89\% & 89\% & 89\% \\
             \hline
-            \texttt{MTL-BiLSTM \cite{tan23}} & Twitter & \textbullet & 93\% & 93\% & 93\% \\
+            \texttt{CNN-BILSTM-Attention \cite{misra}} & Headlines & Inglês & 90\% & \textbullet & \textbullet & \textbullet \\
             \hline
-            \texttt{CNN-LR \cite{razali21}} & Twitter & 94\% & 95\% & 94\% & 94\% \\
+            \texttt{RoBERTa-CNN \cite{pawestri24}} & Headlines & Inglês & 89\% & 88\% & 87\% & 87\% \\
             \hline
-            \texttt{BERT \cite{baruah20}} & Twitter & \textbullet & 74\% & 74\% & 74\% \\
+            \texttt{RoBERTa-BRNN \cite{pawestri24}} & Headlines & Inglês & 65\% & 66\% & 64\% & 65\% \\
             \hline
-            \texttt{BERT \cite{shu24}} & Reddit & 74\% & 74\% & 76\% & 77\% \\
-            \hline
-            \texttt{RoBERTa \cite{shu24}} & Reddit & 76\% & 76\% & 78\% & 77\% \\
-            \hline
-            \texttt{RoBERTa+Bi-LSTM+MHA \cite{khan25}} & Headlines & 93\% & 93\% & 93\% & 93\% \\
+            \texttt{RoBERTa+BiLSTM+MHA \cite{khan25}} & Headlines & Inglês & 71\% & 69\% & 62\% & 65\% \\
             \hline
         \end{tabular}%
     }
@@ -73,6 +143,31 @@ características permitiu capturar melhor o contexto e as nuances da linguagem. 
 base foi superado por pouco, indicando que apesar das melhorias trazidas pelo BERT, o BiLSTM ainda é um 
 modelo competitivo para a tarefa de detecção de sarcasmo.
 
+Com relação ao modelo base (BiLSTM simples), a matriz de confusão é apresentada na Figura 
+\ref{fig:matriz_confusao_bilstm} e a curva ROC na Figura \ref{fig:curva_roc_bilstm}. A curva ROC do modelo 
+base mostra uma AUC de aproximadamente 0,91, indicando uma boa capacidade de distinção entre as classes,
+embora ligeiramente inferior ao modelo proposto. A matriz de confusão revela que o modelo base classificou 
+corretamente 1696 títulos sarcásticos (TP) e 1874 títulos não sarcásticos (TN), com 374 falsos 
+positivos (FP) e 349 falsos negativos (FN). Esses resultados sugerem que o modelo base é eficaz, 
+mas apresenta uma taxa maior de falsos positivos em comparação com o modelo proposto.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{5-avaliacao_experimental/figuras/matriz_confusao_bilstm.png}
+        \caption{Matriz de Confusão do modelo base.}
+        \label{fig:matriz_confusao_bilstm}
+    \end{minipage}\hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{5-avaliacao_experimental/figuras/curva_roc_bilstm.png}
+        \caption{Curva ROC do modelo base.}
+        \label{fig:curva_roc_bilstm}
+    \end{minipage}
+    \caption{Matriz de confusão e curva ROC do modelo base.}
+    \label{fig:matriz_confusao_roc_bilstm}
+\end{figure}
 
 Em comparação com outros modelos existentes na literatura, o modelo proposto apresentou um desempenho
 competitivo, embora alguns modelos, como o MTL-BiLSTM \cite{tan23} e o CNN-LR \cite{razali21}, tenham 
@@ -84,10 +179,11 @@ abordagens utilizadas.
 
 
 Se comparado com os trabalhos que utilizaram a mesma base de dados de notícias sarcásticas em inglês,
-o modelo proposto apresentou um desempenho semelhante ao de \citet{nayak22}, que também utilizou BERT 
-com BiLSTM, alcançando um F1-Score de 89\%. No entanto, o modelo proposto ficou abaixo do desempenho 
-de \citet{tan23}, que alcançou um F1-Score de 93\% utilizando uma abordagem de aprendizado multitarefa 
-com BiLSTM.
+o modelo proposto ficou atrás apenas do modelo BERT + BiLSTM \cite{nayak22}, que alcançou um F1-Score de 
+89\%. Mesmos modelos utilizando RoBERTa, um modelo mais recente e robusto que o BERT, como o RoBERTa + BiLSTM + MHA 
+\cite{khan25} e os modelos propostos por \citet{pawestri24} ficaram atrás do modelo proposto, indicando que a 
+incorporação do BERT como extrator de características foi eficaz para a tarefa de detecção de sarcasmo em títulos
+de notícias em português.
 
 
 Os resultados obtidos indicam que o modelo proposto é eficaz na detecção de sarcasmo em títulos de 

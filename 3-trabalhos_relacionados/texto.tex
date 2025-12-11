@@ -36,6 +36,10 @@ para extrair características do texto e, em seguida, alimentar um classificador
 com essas características. O modelo proposto alcançou um F1-Score de 95\% na detecção de sarcasmo, 
 superando outros métodos tradicionais de classificação.
 
+\citet{misra} foram quem criaram a base de dados de notícias sarcásticas utilizada neste trabalho. 
+Eles propuseram um modelo baseado em CNN, BiLSTM e mecanismos de atenção para a detecção de sarcasmo em 
+manchetes de notícias. O modelo proposto por eles alcançou uma acurácia de 90\% na detecção de sarcasmo
+utilizando essa base de dados.
 
 Por fim, \citet{scola21} propuseram um modelo base que seria utilizado como baseline para a detecção de 
 sarcasmo em textos. Eles utilizaram uma arquitetura baseada em BiLSTM com embeddings pré-treinados 
@@ -84,6 +88,12 @@ dados: Duas vindas do Reddit e uma do Twitter. O modelo proposto alcançou um F1
 detecção de sarcasmo, superando outros modelos de referência.
 
 
+\citet{pawestri24} propuseram dois modelos baseados em RoBERTa para a detecção de sarcasmo em textos. 
+Os dois modelos utilizaram RoBERTa como base, porém um modelo utilizou CNN e o outro uma BRNN. 
+Utilizando uma base de notícias sarcásticas, o modelo baseado em CNN alcançou um F1-Score de 
+88\%, enquanto o modelo baseado em BRNN alcançou um F1-Score de 65\%. 
+
+
 Por fim, os mesmos \citet{scola21} também exploraram o uso do BERT para a detecção de sarcasmo em textos. Eles
 utilizaram o BERT Large como classificador direto, sem a utilização de camadas adicionais. 
 A base de dados utilizada por eles foi a mesma de notícias sarcásticas utilizada neste trabalho e o modelo
@@ -121,7 +131,7 @@ fornecendo uma representação rica do contexto de cada palavra na sequência. E
 processadas passam por uma camada de Global Max Pooling que extrai as características mais relevantes e 
 fortes ao longo de todas as etapas da sequência, condensando-as em um vetor de tamanho fixo. 
 A representação resultante passa por camadas Dense, que interpretam, refinam e comprimem os 
-recursos aprendidos. Para melhorar a generalização e reduzir o overfitting, camadas de Dropout 
+recursos aprendidos. Para melhorar a generalização e reduzir o sobreajuste, camadas de Dropout 
 desativam neurônios aleatoriamente durante o treinamento. Por fim, uma camada de saída Sigmoid produz 
 uma probabilidade entre 0 e 1, permitindo que o modelo realize uma classificação binária, no caso, 
 sarcasmo ou não sarcasmo.
